@@ -1,0 +1,1792 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corefinity - Cloud Hosting Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1e5ba8;
+            --secondary-blue: #4a9ff5;
+            --orange: #ff6b35;
+            --light-bg: #f8fafc;
+            --white: #ffffff;
+            --dark-text: #1a202c;
+            --gray-text: #4a5568;
+            --border-gray: #e2e8f0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            background: var(--white);
+            border-bottom: 1px solid var(--border-gray);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .logo span {
+            color: var(--secondary-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+            background: rgba(74, 159, 245, 0.1);
+        }
+
+        .nav-links a.cta-button {
+            padding: 12px 28px;
+            background: var(--orange);
+            color: white;
+            font-weight: 600;
+            border-radius: 25px;
+        }
+
+        .nav-links a.cta-button:hover {
+            background: #ff5522;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 102, 51, 0.3);
+        }
+
+        .cta-button {
+            background: var(--orange);
+            color: var(--white);
+            padding: 12px 28px;
+            border-radius: 6px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: #e85a28;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Mega Menu Styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .mega-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            min-width: 600px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+            padding: 20px;
+        }
+
+        .dropdown:hover .mega-menu,
+        .dropdown:focus-within .mega-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mega-column {
+            flex: 1;
+            padding: 0 15px;
+        }
+
+        .mega-column h3 {
+            color: var(--primary-blue);
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mega-column h3 i {
+            font-size: 20px;
+        }
+
+        .mega-column p {
+            color: var(--text-light);
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .mega-link {
+            color: var(--secondary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: gap 0.3s;
+        }
+
+        .mega-link:hover {
+            gap: 8px;
+        }
+
+        .mega-menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+        .hero-banner {
+            background: linear-gradient(135deg, #f0f7ff 0%, #e6f2ff 100%);
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(74, 159, 245, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(30, 91, 168, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-banner h1 {
+            font-size: 52px;
+            margin-bottom: 24px;
+            color: var(--dark-text);
+            font-weight: 700;
+        }
+
+        .hero-banner h1 .highlight {
+            color: var(--secondary-blue);
+        }
+
+        .hero-banner p {
+            font-size: 20px;
+            color: var(--gray-text);
+            max-width: 800px;
+            margin: 0 auto 32px;
+            line-height: 1.8;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .hero-stat-value i {
+            font-size: 28px;
+            color: var(--secondary-blue);
+        }
+
+        .hero-stat-label {
+            font-size: 14px;
+            color: var(--gray-text);
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pricing-toggle {
+            background: var(--white);
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-label {
+            color: var(--secondary-blue);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .section-title {
+            font-size: 42px;
+            color: var(--dark-text);
+            font-weight: 700;
+        }
+
+        .toggle-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .toggle-label {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--gray-text);
+            transition: color 0.3s;
+        }
+
+        .toggle-label.active {
+            color: var(--primary-blue);
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 32px;
+            background: var(--border-gray);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .toggle-switch.active {
+            background: var(--secondary-blue);
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 24px;
+            height: 24px;
+            background: var(--white);
+            border-radius: 50%;
+            transition: transform 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(28px);
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+
+        .pricing-card {
+            background: var(--white);
+            border: 2px solid var(--border-gray);
+            border-radius: 16px;
+            padding: 48px 36px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+            border-color: var(--secondary-blue);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--secondary-blue);
+            border-width: 3px;
+            background: linear-gradient(to bottom, var(--white) 0%, #f0f7ff 100%);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -16px;
+            right: 36px;
+            background: linear-gradient(135deg, var(--orange), #ff8555);
+            color: var(--white);
+            padding: 8px 20px;
+            border-radius: 24px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+        }
+
+        .plan-icon {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            color: var(--white);
+            font-size: 32px;
+        }
+
+        .pricing-card.featured .plan-icon {
+            background: linear-gradient(135deg, var(--orange), #ff8555);
+        }
+
+        .plan-name {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--dark-text);
+        }
+
+        .plan-price {
+            font-size: 52px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+        }
+
+        .plan-price span {
+            font-size: 18px;
+            color: var(--gray-text);
+            font-weight: 500;
+        }
+
+        .plan-description {
+            color: var(--gray-text);
+            margin-bottom: 32px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 36px;
+        }
+
+        .plan-features li {
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border-gray);
+            color: var(--gray-text);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+        }
+
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+
+        .plan-features li i {
+            color: var(--secondary-blue);
+            font-size: 16px;
+            width: 20px;
+        }
+
+        .select-plan-btn {
+            width: 100%;
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .select-plan-btn:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(74, 159, 245, 0.4);
+        }
+
+        .pricing-card.featured .select-plan-btn {
+            background: var(--orange);
+        }
+
+        .pricing-card.featured .select-plan-btn:hover {
+            background: #e85a28;
+        }
+
+        .comparison-section {
+            background: var(--light-bg);
+            padding: 100px 0;
+        }
+
+        .comparison-table-wrapper {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table thead {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+        }
+
+        .comparison-table th {
+            color: var(--white);
+            padding: 24px 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .comparison-table td {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-gray);
+            font-size: 15px;
+        }
+
+        .comparison-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: var(--light-bg);
+        }
+
+        .feature-name {
+            font-weight: 600;
+            color: var(--dark-text);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .feature-name i {
+            color: var(--secondary-blue);
+            font-size: 18px;
+            width: 24px;
+        }
+
+        .check-icon {
+            color: var(--secondary-blue);
+            font-size: 20px;
+        }
+
+        .cross-icon {
+            color: var(--gray-text);
+            opacity: 0.3;
+            font-size: 20px;
+        }
+
+        .features-grid-section {
+            background: var(--white);
+            padding: 100px 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: var(--light-bg);
+            padding: 40px 32px;
+            border-radius: 16px;
+            border: 1px solid var(--border-gray);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+            background: var(--white);
+            border-color: var(--secondary-blue);
+        }
+
+        .feature-icon {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            color: var(--white);
+            font-size: 32px;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 16px;
+            color: var(--dark-text);
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: var(--gray-text);
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .addons-section {
+            background: var(--light-bg);
+            padding: 100px 0;
+        }
+
+        .addons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 60px;
+        }
+
+        .addon-card {
+            background: var(--white);
+            border: 2px solid var(--border-gray);
+            border-radius: 12px;
+            padding: 32px 28px;
+            transition: all 0.3s;
+        }
+
+        .addon-card:hover {
+            border-color: var(--secondary-blue);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .addon-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .addon-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--dark-text);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .addon-title i {
+            color: var(--secondary-blue);
+            font-size: 24px;
+        }
+
+        .addon-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .addon-price span {
+            font-size: 14px;
+            color: var(--gray-text);
+            font-weight: 500;
+        }
+
+        .addon-description {
+            color: var(--gray-text);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .addon-btn {
+            width: 100%;
+            background: var(--white);
+            color: var(--primary-blue);
+            padding: 12px;
+            border: 2px solid var(--primary-blue);
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .addon-btn:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .faq-section {
+            background: var(--white);
+            padding: 100px 0;
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--light-bg);
+            border-radius: 12px;
+            margin-bottom: 16px;
+            border: 2px solid var(--border-gray);
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: var(--secondary-blue);
+        }
+
+        .faq-question {
+            padding: 28px 32px;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark-text);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .faq-question:hover {
+            color: var(--secondary-blue);
+        }
+
+        .faq-question i {
+            font-size: 20px;
+            color: var(--secondary-blue);
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .faq-answer-content {
+            padding: 0 32px 28px 32px;
+            color: var(--gray-text);
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .testimonials-section {
+            background: var(--light-bg);
+            padding: 100px 0;
+        }
+
+        .testimonial-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 16px;
+            border-left: 4px solid var(--secondary-blue);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .rating {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 16px;
+        }
+
+        .rating i {
+            color: #fbbf24;
+            font-size: 18px;
+        }
+
+        .testimonial-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--gray-text);
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .author-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .author-info h4 {
+            font-size: 16px;
+            margin-bottom: 4px;
+            color: var(--dark-text);
+            font-weight: 600;
+        }
+
+        .author-info p {
+            color: var(--gray-text);
+            font-size: 14px;
+        }
+
+        .guarantee-section {
+            background: var(--white);
+            padding: 80px 0;
+        }
+
+        .guarantee-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .guarantee-item {
+            padding: 32px;
+        }
+
+        .guarantee-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--white);
+            font-size: 36px;
+        }
+
+        .guarantee-item h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: var(--dark-text);
+        }
+
+        .guarantee-item p {
+            color: var(--gray-text);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            padding: 100px 0;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .cta-section p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-white {
+            background: var(--white);
+            color: var(--primary-blue);
+        }
+
+        .cta-white:hover {
+            background: var(--light-bg);
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background: var(--dark-text);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 48px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-section h4 i {
+            color: var(--secondary-blue);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-section a i {
+            font-size: 14px;
+        }
+
+        .footer-section a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+                background: none;
+                border: none;
+                font-size: 24px;
+                cursor: pointer;
+                color: var(--primary-blue);
+            }
+
+            .hero-banner h1 {
+                font-size: 36px;
+            }
+
+            .hero-banner p {
+                font-size: 18px;
+            }
+
+            .hero-stats {
+                gap: 32px;
+            }
+
+            .pricing-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .comparison-table-wrapper {
+                overflow-x: auto;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .addons-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonial-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .guarantee-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+   <header>
+        <nav class="container">
+            <img src="https://www.corefinity.com/images/logo.svg" alt="Corefinity Logo" style="height: 40px;">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Solutions <i
+                            class="fas fa-chevron-down"></i></a>
+                    <div class="mega-menu">
+                        <div class="mega-column">
+                            <h3><i class="fab fa-magento"></i> Magento Hosting</h3>
+                            <p>Optimized hosting for Magento 2 e-commerce platforms with enterprise-grade performance.
+                            </p>
+                            <a href="solution.html" class="mega-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="mega-column">
+                            <h3><i class="fab fa-laravel"></i> Laravel Hosting</h3>
+                            <p>High-performance hosting for Laravel applications with advanced caching and scaling.</p>
+                            <a href="laravel.html" class="mega-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="agency.html">Agency</a></li>
+                <li><a href="support.html">Support</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="tel:+88881234567" class="cta-button"><i class="fas fa-phone"></i> +8888-123-7008</a></li>
+            </ul>
+            <button class="mobile-menu">☰</button>
+        </nav>
+    </header>
+    <section class="hero-banner">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Choose Your <span class="highlight">Perfect Hosting Plan</span></h1>
+                <p>Flexible, scalable, and powerful hosting solutions designed for businesses of all sizes. From
+                    startups to enterprises, we've got you covered with industry-leading performance and reliability.
+                </p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-value"><i class="fas fa-bolt"></i>99.99%</div>
+                        <div class="hero-stat-label">Uptime SLA</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value"><i class="fas fa-users"></i>10,000+</div>
+                        <div class="hero-stat-label">Happy Clients</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-value"><i class="fas fa-globe"></i>50+</div>
+                        <div class="hero-stat-label">Global Regions</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing-toggle">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label"><i class="fas fa-tags"></i> PRICING PLANS</div>
+                <h2 class="section-title">Transparent & Affordable Pricing</h2>
+            </div>
+            <div class="toggle-wrapper">
+                <span class="toggle-label active" id="monthlyLabel">Monthly Billing</span>
+                <div class="toggle-switch" id="billingToggle">
+                    <div class="toggle-slider"></div>
+                </div>
+                <span class="toggle-label" id="annualLabel">Annual Billing <span
+                        style="color: var(--orange); font-weight: 700;">(Save 20%)</span></span>
+            </div>
+
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <div class="plan-icon"><i class="fas fa-rocket"></i></div>
+                    <div class="plan-name">Starter</div>
+                    <div class="plan-price">$49<span>/month</span></div>
+                    <div class="plan-description">Perfect for small projects and testing environments</div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-microchip"></i> 2 vCPU Cores</li>
+                        <li><i class="fas fa-memory"></i> 4 GB RAM</li>
+                        <li><i class="fas fa-hdd"></i> 50 GB SSD Storage</li>
+                        <li><i class="fas fa-exchange-alt"></i> 1 TB Bandwidth</li>
+                        <li><i class="fas fa-lock"></i> Free SSL Certificate</li>
+                        <li><i class="fas fa-save"></i> Daily Backups</li>
+                        <li><i class="fas fa-envelope"></i> Email Support</li>
+                    </ul>
+                    <button class="select-plan-btn"><span>Select Plan</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="popular-badge"><i class="fas fa-star"></i> Most Popular</div>
+                    <div class="plan-icon"><i class="fas fa-fire"></i></div>
+                    <div class="plan-name">Professional</div>
+                    <div class="plan-price">$149<span>/month</span></div>
+                    <div class="plan-description">Ideal for growing businesses and medium traffic sites</div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-microchip"></i> 4 vCPU Cores</li>
+                        <li><i class="fas fa-memory"></i> 16 GB RAM</li>
+                        <li><i class="fas fa-hdd"></i> 200 GB SSD Storage</li>
+                        <li><i class="fas fa-exchange-alt"></i> 5 TB Bandwidth</li>
+                        <li><i class="fas fa-lock"></i> Free SSL Certificate</li>
+                        <li><i class="fas fa-clock"></i> Hourly Backups</li>
+                        <li><i class="fas fa-headset"></i> 24/7 Priority Support</li>
+                        <li><i class="fas fa-network-wired"></i> CDN Integration</li>
+                        <li><i class="fas fa-shield-alt"></i> Advanced Security</li>
+                    </ul>
+                    <button class="select-plan-btn"><span>Select Plan</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="plan-icon"><i class="fas fa-crown"></i></div>
+                    <div class="plan-name">Enterprise</div>
+                    <div class="plan-price">$399<span>/month</span></div>
+                    <div class="plan-description">Maximum power for high-traffic enterprise applications</div>
+                    <ul class="plan-features">
+                        <li><i class="fas fa-microchip"></i> 8 vCPU Cores</li>
+                        <li><i class="fas fa-memory"></i> 32 GB RAM</li>
+                        <li><i class="fas fa-hdd"></i> 500 GB SSD Storage</li>
+                        <li><i class="fas fa-infinity"></i> Unlimited Bandwidth</li>
+                        <li><i class="fas fa-lock"></i> Free SSL Certificate</li>
+                        <li><i class="fas fa-sync"></i> Real-time Backups</li>
+                        <li><i class="fas fa-user-tie"></i> Dedicated Support Manager</li>
+                        <li><i class="fas fa-network-wired"></i> Advanced CDN</li>
+                        <li><i class="fas fa-shield-alt"></i> Enterprise Security</li>
+                        <li><i class="fas fa-sliders-h"></i> Custom Configuration</li>
+                        <li><i class="fas fa-certificate"></i> 99.99% SLA</li>
+                    </ul>
+                    <button class="select-plan-btn"><span>Select Plan</span> <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="comparison-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label"><i class="fas fa-table"></i> DETAILED COMPARISON</div>
+                <h2 class="section-title">Compare All Features</h2>
+            </div>
+            <div class="comparison-table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-list"></i> Features</th>
+                            <th><i class="fas fa-rocket"></i> Starter</th>
+                            <th><i class="fas fa-fire"></i> Professional</th>
+                            <th><i class="fas fa-crown"></i> Enterprise</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-name"><i class="fas fa-microchip"></i> vCPU Cores</td>
+                            <td>2 Cores</td>
+                            <td>4 Cores</td>
+                            <td>8 Cores</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name"><i class="fas fa-memory"></i> RAM Memory</td>
+                            <td>4 GB</td>
+                            <td>16 GB</td>
+                            <td>32 GB</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name"><i class="fas fa-hdd"></i> SSD Storage</td>
+                            <td>50 GB</td>
+                            <td>200 GB</td>
+                            <td>500 GB</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name"><i class="fas fa-exchange-alt"></i> Bandwidth</td>
+                            <td>1 TB</td>
+                            <td>5 TB</td>
+                            <td>Unlimited</td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name"><i class="fas fa-lock"></i> Free SSL Certificate</td>
+                            <td><i class="fas fa-check-circle check-icon"></i></td>
+                            <td><i class="fas fa-check-circle check-icon"></i></td>
+                            <td><i class="fas fa-check-circle check-icon"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name"><i class="fas fa-network-wired"></i> CDN Integration</td>
+                            <td><i class="fas fa-times-circle cross-icon"></i></td>
+                            <td><i class="fas fa-check-circle check-icon"></i></td>
+                            <td><i class="fas fa-check-circle check-icon"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name"><i class="fas fa-shield-alt"></i> Advanced Security</td>
+                            <td><i class="fas fa-times-circle cross-icon"></i></td>
+                            <td><i class="fas fa-check-circle check-icon"></i></td>
+                            <td><i class="fas fa-check-circle check-icon"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name"><i class="fas fa-headset"></i> 24/7 Support</td>
+                            <td><i class="fas fa-times-circle cross-icon"></i></td>
+                            <td><i class="fas fa-check-circle check-icon"></i></td>
+                            <td><i class="fas fa-check-circle check-icon"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name"><i class="fas fa-user-tie"></i> Dedicated Manager</td>
+                            <td><i class="fas fa-times-circle cross-icon"></i></td>
+                            <td><i class="fas fa-times-circle cross-icon"></i></td>
+                            <td><i class="fas fa-check-circle check-icon"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name"><i class="fas fa-sliders-h"></i> Custom Configuration</td>
+                            <td><i class="fas fa-times-circle cross-icon"></i></td>
+                            <td><i class="fas fa-times-circle cross-icon"></i></td>
+                            <td><i class="fas fa-check-circle check-icon"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name"><i class="fas fa-chart-line"></i> Performance Monitoring</td>
+                            <td><i class="fas fa-check-circle check-icon"></i></td>
+                            <td><i class="fas fa-check-circle check-icon"></i></td>
+                            <td><i class="fas fa-check-circle check-icon"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name"><i class="fas fa-server"></i> Load Balancing</td>
+                            <td><i class="fas fa-times-circle cross-icon"></i></td>
+                            <td><i class="fas fa-check-circle check-icon"></i></td>
+                            <td><i class="fas fa-check-circle check-icon"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-grid-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label"><i class="fas fa-gift"></i> WHAT'S INCLUDED</div>
+                <h2 class="section-title">All Plans Include</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>Lightning Fast Performance</h3>
+                    <p>Our optimized stack ensures your applications run at peak performance with ultra-low latency and
+                        blazing fast load times.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Enterprise Security</h3>
+                    <p>PCI compliant infrastructure with DDoS protection, SSL certificates, advanced firewalls, and 24/7
+                        security monitoring.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-database"></i></div>
+                    <h3>Automated Backups</h3>
+                    <p>Regular automated backups ensure your data is always safe, secure, and recoverable at any point
+                        in time.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-globe-americas"></i></div>
+                    <h3>Global CDN Network</h3>
+                    <p>Deliver content faster with our worldwide CDN network spanning 70+ locations across every
+                        continent.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
+                    <h3>Real-time Monitoring</h3>
+                    <p>Track performance metrics, server health, and receive instant alerts for any issues through our
+                        advanced dashboard.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-sliders-h"></i></div>
+                    <h3>Easy Management</h3>
+                    <p>Intuitive control panel makes server management simple and straightforward with one-click
+                        deployments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="addons-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label"><i class="fas fa-puzzle-piece"></i> ADD-ONS</div>
+                <h2 class="section-title">Enhance Your Hosting</h2>
+            </div>
+            <div class="addons-grid">
+                <div class="addon-card">
+                    <div class="addon-header">
+                        <div class="addon-title"><i class="fas fa-database"></i> Extra Storage</div>
+                        <div class="addon-price">$15<span>/mo</span></div>
+                    </div>
+                    <p class="addon-description">Add 100GB of premium SSD storage to any plan for your growing data
+                        needs.</p>
+                    <button class="addon-btn"><i class="fas fa-plus-circle"></i> Add to Plan</button>
+                </div>
+                <div class="addon-card">
+                    <div class="addon-header">
+                        <div class="addon-title"><i class="fas fa-tachometer-alt"></i> Performance Boost</div>
+                        <div class="addon-price">$25<span>/mo</span></div>
+                    </div>
+                    <p class="addon-description">Get 2x more CPU power and RAM for resource-intensive applications.</p>
+                    <button class="addon-btn"><i class="fas fa-plus-circle"></i> Add to Plan</button>
+                </div>
+                <div class="addon-card">
+                    <div class="addon-header">
+                        <div class="addon-title"><i class="fas fa-lock"></i> Advanced Security</div>
+                        <div class="addon-price">$30<span>/mo</span></div>
+                    </div>
+                    <p class="addon-description">Enhanced DDoS protection, malware scanning, and firewall configuration.
+                    </p>
+                    <button class="addon-btn"><i class="fas fa-plus-circle"></i> Add to Plan</button>
+                </div>
+                <div class="addon-card">
+                    <div class="addon-header">
+                        <div class="addon-title"><i class="fas fa-envelope"></i> Email Hosting</div>
+                        <div class="addon-price">$10<span>/mo</span></div>
+                    </div>
+                    <p class="addon-description">Professional email hosting with 50GB storage and spam protection.</p>
+                    <button class="addon-btn"><i class="fas fa-plus-circle"></i> Add to Plan</button>
+                </div>
+                <div class="addon-card">
+                    <div class="addon-header">
+                        <div class="addon-title"><i class="fas fa-save"></i> Priority Backups</div>
+                        <div class="addon-price">$20<span>/mo</span></div>
+                    </div>
+                    <p class="addon-description">Hourly backups with instant restoration and 90-day retention period.
+                    </p>
+                    <button class="addon-btn"><i class="fas fa-plus-circle"></i> Add to Plan</button>
+                </div>
+                <div class="addon-card">
+                    <div class="addon-header">
+                        <div class="addon-title"><i class="fas fa-rocket"></i> Premium CDN</div>
+                        <div class="addon-price">$35<span>/mo</span></div>
+                    </div>
+                    <p class="addon-description">Ultra-fast content delivery with unlimited bandwidth and edge caching.
+                    </p>
+                    <button class="addon-btn"><i class="fas fa-plus-circle"></i> Add to Plan</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="guarantee-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label"><i class="fas fa-certificate"></i> OUR GUARANTEES</div>
+                <h2 class="section-title">Risk-Free Hosting</h2>
+            </div>
+            <div class="guarantee-content">
+                <div class="guarantee-item">
+                    <div class="guarantee-icon"><i class="fas fa-check-double"></i></div>
+                    <h3>99.99% Uptime SLA</h3>
+                    <p>We guarantee maximum availability with enterprise-grade infrastructure and redundant systems.</p>
+                </div>
+                <div class="guarantee-item">
+                    <div class="guarantee-icon"><i class="fas fa-undo-alt"></i></div>
+                    <h3>30-Day Money Back</h3>
+                    <p>Not satisfied? Get a full refund within the first 30 days, no questions asked.</p>
+                </div>
+                <div class="guarantee-item">
+                    <div class="guarantee-icon"><i class="fas fa-headset"></i></div>
+                    <h3>24/7 Expert Support</h3>
+                    <p>Our team of experts is always available to help you with any issues or questions.</p>
+                </div>
+                <div class="guarantee-item">
+                    <div class="guarantee-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Data Protection</h3>
+                    <p>Your data is protected with enterprise-grade encryption and regular security audits.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label"><i class="fas fa-question-circle"></i> FAQ</div>
+                <h2 class="section-title">Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What payment methods do you accept?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            We accept all major credit cards (Visa, MasterCard, American Express, Discover), PayPal, and
+                            wire transfers for enterprise accounts. All payments are processed securely through our
+                            encrypted payment gateway with PCI DSS compliance.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I upgrade or downgrade my plan at any time?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes, you can upgrade or downgrade your hosting plan at any time with just a few clicks.
+                            Changes take effect immediately, and we'll prorate any charges or credits based on your
+                            current billing cycle. There are no penalties for switching plans.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What is your uptime guarantee?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            We guarantee 99.99% uptime for all our hosting plans. Our infrastructure is built on
+                            enterprise-grade cloud providers with redundant systems, automatic failover, and 24/7
+                            monitoring to ensure maximum availability. If we fail to meet this guarantee, you'll receive
+                            service credits.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Do you offer migration assistance?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes, our team provides free migration assistance for all new customers. We'll handle the
+                            entire migration process including transferring your files, databases, and configurations to
+                            ensure a smooth transition with zero downtime. Our experts will work with you every step of
+                            the way.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What kind of support do you provide?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            We offer 24/7 support via email and live chat for all plans. Professional and Enterprise
+                            plans include priority support with faster response times (average 7 minutes for
+                            emergencies), phone support, and dedicated account managers for Enterprise customers. All
+                            our support staff are experienced system administrators.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is there a money-back guarantee?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes, we offer a 30-day money-back guarantee on all new hosting plans. If you're not
+                            completely satisfied with our service for any reason, you can request a full refund within
+                            the first 30 days of your subscription. No questions asked, no hassle.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How secure is my data with Corefinity?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Your data security is our top priority. We provide PCI compliant infrastructure, DDoS
+                            protection, free SSL certificates, advanced firewalls, regular security audits, automated
+                            backups, and 24/7 security monitoring. All data is encrypted both in transit and at rest
+                            using industry-standard encryption protocols.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I host multiple websites on one plan?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes, all our plans support multiple websites and domains. The number of sites you can host
+                            depends on your resource allocation (CPU, RAM, storage). Professional and Enterprise plans
+                            are optimized for hosting multiple high-traffic websites with dedicated resources and load
+                            balancing.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label"><i class="fas fa-star"></i> CLIENT TESTIMONIALS</div>
+                <h2 class="section-title">What Our Customers Say</h2>
+            </div>
+            <div class="testimonial-cards">
+                <div class="testimonial-card">
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Switching to Corefinity was the best decision we made for our
+                        e-commerce business. Our site speed improved dramatically, and their support team is incredibly
+                        responsive. They truly understand what high-traffic websites need."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JM</div>
+                        <div class="author-info">
+                            <h4>John Martinez</h4>
+                            <p>CEO, TechStore</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"The migration process was seamless, and we experienced zero downtime.
+                        Their Professional plan has everything we need, and the pricing is very competitive. The 24/7
+                        support is outstanding!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SK</div>
+                        <div class="author-info">
+                            <h4>Sarah Kim</h4>
+                            <p>CTO, Digital Solutions</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Outstanding performance and reliability. We've been with Corefinity for
+                        over two years, and they've consistently delivered excellent service. Their Enterprise plan
+                        handles our high traffic perfectly. Highly recommended!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RP</div>
+                        <div class="author-info">
+                            <h4>Robert Patterson</h4>
+                            <p>Director, Commerce Plus</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Get Started with Corefinity?</h2>
+                <p>Choose your plan today and experience the difference in performance and reliability</p>
+                <div class="cta-buttons">
+                    <a href="#pricing" class="cta-button cta-white"><i class="fas fa-rocket"></i> View All Plans</a>
+                    <a href="tel:+88881237008" class="cta-button"><i class="fas fa-phone"></i> Call Us:
+                        +8888-123-7008</a>
+                    <a href="#contact" class="cta-button cta-white"><i class="fas fa-comments"></i> Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4><i class="fas fa-link"></i> QUICK LINKS</h4>
+                    <ul>
+                        <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+                        <li><a href="#services"><i class="fas fa-cogs"></i> Services</a></li>
+                        <li><a href="#pricing"><i class="fas fa-tags"></i> Pricing</a></li>
+                        <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4><i class="fas fa-server"></i> SOLUTIONS</h4>
+                    <ul>
+                        <li><a href="#magento"><i class="fas fa-shopping-cart"></i> Magento Hosting</a></li>
+                        <li><a href="#wordpress"><i class="fab fa-wordpress"></i> WordPress Hosting</a></li>
+                        <li><a href="#ecommerce"><i class="fas fa-store"></i> E-commerce Hosting</a></li>
+                        <li><a href="#cloud"><i class="fas fa-cloud"></i> Cloud Infrastructure</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4><i class="fas fa-map-marker-alt"></i> UNITED KINGDOM</h4>
+                    <ul>
+                        <li><a href="tel:+441615058000"><i class="fas fa-phone"></i> +44 161 505 8000</a></li>
+                        <li><a href="mailto:info@corefinity.com"><i class="fas fa-envelope"></i> info@corefinity.com</a>
+                        </li>
+                        <li><i class="fas fa-building"></i> Metro City House, Gateshead, Tyne and Wear, NE11 9DJ</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4><i class="fas fa-flag-usa"></i> UNITED STATES</h4>
+                    <ul>
+                        <li><a href="tel:+88881237008"><i class="fas fa-phone"></i> +8888-123-7008</a></li>
+                        <li><a href="mailto:info@corefinity.com"><i class="fas fa-envelope"></i> info@corefinity.com</a>
+                        </li>
+                        <li><i class="fas fa-building"></i> 750 Highway Lane, Chattanooga, Tennessee, TN 37450</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p><i class="fas fa-copyright"></i> Copyright 2025 Corefinity Consulting Ltd. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const billingToggle = document.getElementById('billingToggle');
+        const monthlyLabel = document.getElementById('monthlyLabel');
+        const annualLabel = document.getElementById('annualLabel');
+        const priceElements = document.querySelectorAll('.plan-price');
+
+        const monthlyPrices = [49, 149, 399];
+        const annualPrices = [39, 119, 319];
+
+        let isAnnual = false;
+
+        billingToggle.addEventListener('click', function () {
+            isAnnual = !isAnnual;
+            this.classList.toggle('active');
+
+            if (isAnnual) {
+                monthlyLabel.classList.remove('active');
+                annualLabel.classList.add('active');
+                priceElements.forEach((el, index) => {
+                    el.innerHTML = `${annualPrices[index]}<span>/month</span>`;
+                });
+            } else {
+                monthlyLabel.classList.add('active');
+                annualLabel.classList.remove('active');
+                priceElements.forEach((el, index) => {
+                    el.innerHTML = `${monthlyPrices[index]}<span>/month</span>`;
+                });
+            }
+        });
+
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+
+                faqItems.forEach(faq => faq.classList.remove('active'));
+
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        const selectButtons = document.querySelectorAll('.select-plan-btn');
+
+        selectButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const planName = this.closest('.pricing-card').querySelector('.plan-name').textContent;
+                alert(`You selected the ${planName} plan. Redirecting to checkout...`);
+            });
+        });
+
+        const addonButtons = document.querySelectorAll('.addon-btn');
+
+        addonButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const addonName = this.closest('.addon-card').querySelector('.addon-title').textContent.trim();
+                const addonPrice = this.closest('.addon-card').querySelector('.addon-price').textContent;
+                alert(`Adding ${addonName} (${addonPrice}) to your cart...`);
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Mobile dropdown toggle
+        dropdowns.forEach(dropdown => {
+            const toggle = dropdown.querySelector('.dropdown-toggle');
+            toggle.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    dropdown.classList.toggle('active');
+                }
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                navLinks.classList.remove('active');
+                dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
+            }
+        });
+    </script>
+</body>
+
+</html>

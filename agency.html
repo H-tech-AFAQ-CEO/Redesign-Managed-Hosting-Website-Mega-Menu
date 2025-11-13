@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Corefinity</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1e5ba8;
+            --secondary-blue: #4a9ff5;
+            --orange: #ff6b35;
+            --light-bg: #f8fafc;
+            --white: #ffffff;
+            --dark-text: #1a202c;
+            --gray-text: #4a5568;
+            --border-gray: #e2e8f0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            background: var(--white);
+            border-bottom: 1px solid var(--border-gray);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .logo span {
+            color: var(--secondary-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+            background: rgba(74, 159, 245, 0.1);
+        }
+
+        .nav-links a.cta-button {
+            padding: 12px 28px;
+            background: var(--orange);
+            color: var(--white);
+            font-weight: 600;
+            border-radius: 25px;
+        }
+
+        .nav-links a.cta-button:hover {
+            background: #e85a28;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+        }
+
+        .cta-button {
+            background: var(--orange);
+            color: var(--white);
+            padding: 12px 28px;
+            border-radius: 6px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: #e85a28;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Mega Menu Styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .mega-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            min-width: 600px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+            padding: 20px;
+        }
+
+        .dropdown:hover .mega-menu,
+        .dropdown:focus-within .mega-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mega-column {
+            flex: 1;
+            padding: 0 15px;
+        }
+
+        .mega-column h3 {
+            color: var(--primary-blue);
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mega-column h3 i {
+            font-size: 20px;
+        }
+
+        .mega-column p {
+            color: var(--text-light);
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .mega-link {
+            color: var(--secondary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: gap 0.3s;
+        }
+
+        .mega-link:hover {
+            gap: 8px;
+        }
+
+        .mega-menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+        .page-hero {
+            background: linear-gradient(135deg, #f0f7ff 0%, #e6f2ff 100%);
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-size: 48px;
+            color: var(--dark-text);
+            margin-bottom: 16px;
+        }
+
+        .page-hero .highlight {
+            color: var(--secondary-blue);
+        }
+
+        .page-hero p {
+            font-size: 20px;
+            color: var(--gray-text);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            background: var(--white);
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .breadcrumb-nav a {
+            color: var(--secondary-blue);
+            text-decoration: none;
+        }
+
+        .breadcrumb-nav span {
+            color: var(--gray-text);
+        }
+
+        .services-intro {
+            background: var(--white);
+            padding: 80px 0;
+        }
+
+        .intro-content {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            color: var(--secondary-blue);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 42px;
+            color: var(--dark-text);
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .intro-text {
+            font-size: 18px;
+            color: var(--gray-text);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .services-grid {
+            background: var(--light-bg);
+            padding: 80px 0;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--border-gray);
+            transition: all 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            border-color: var(--secondary-blue);
+        }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            color: var(--white);
+            font-size: 28px;
+        }
+
+        .service-card h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            color: var(--dark-text);
+        }
+
+        .service-card p {
+            color: var(--gray-text);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+
+        .service-features li {
+            padding: 8px 0;
+            color: var(--gray-text);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .service-features li i {
+            color: var(--secondary-blue);
+            font-size: 16px;
+        }
+
+        .service-link {
+            color: var(--secondary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s;
+        }
+
+        .service-link:hover {
+            gap: 12px;
+        }
+
+        .pricing-section {
+            background: var(--white);
+            padding: 80px 0;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .pricing-card {
+            background: var(--white);
+            border: 2px solid var(--border-gray);
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--secondary-blue);
+            transform: scale(1.05);
+            box-shadow: 0 8px 24px rgba(74, 159, 245, 0.2);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-badge {
+            background: var(--secondary-blue);
+            color: var(--white);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+
+        .pricing-card h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            color: var(--dark-text);
+        }
+
+        .pricing-amount {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 8px;
+        }
+
+        .pricing-amount span {
+            font-size: 20px;
+            color: var(--gray-text);
+            font-weight: 400;
+        }
+
+        .pricing-period {
+            color: var(--gray-text);
+            margin-bottom: 32px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 32px;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 12px 0;
+            color: var(--gray-text);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features li i {
+            color: var(--secondary-blue);
+            font-size: 18px;
+        }
+
+        .secondary-button {
+            background: var(--white);
+            color: var(--primary-blue);
+            padding: 12px 28px;
+            border: 2px solid var(--primary-blue);
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .secondary-button:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .process-section {
+            background: var(--light-bg);
+            padding: 80px 0;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            color: var(--white);
+            font-size: 32px;
+            font-weight: 700;
+            box-shadow: 0 4px 16px rgba(74, 159, 245, 0.3);
+        }
+
+        .process-step h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: var(--dark-text);
+        }
+
+        .process-step p {
+            color: var(--gray-text);
+            line-height: 1.7;
+        }
+
+        .why-choose {
+            background: var(--white);
+            padding: 80px 0;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .why-card {
+            background: var(--light-bg);
+            padding: 32px;
+            border-radius: 12px;
+            border: 2px solid var(--border-gray);
+            transition: all 0.3s;
+        }
+
+        .why-card:hover {
+            border-color: var(--secondary-blue);
+            transform: translateY(-4px);
+        }
+
+        .why-icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+            color: var(--secondary-blue);
+        }
+
+        .why-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: var(--dark-text);
+        }
+
+        .why-card p {
+            color: var(--gray-text);
+            line-height: 1.7;
+        }
+
+        .technologies {
+            background: var(--light-bg);
+            padding: 80px 0;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 24px;
+            margin-top: 60px;
+        }
+
+        .tech-item {
+            background: var(--white);
+            padding: 32px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s;
+        }
+
+        .tech-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .tech-item i {
+            font-size: 48px;
+            color: var(--secondary-blue);
+            margin-bottom: 16px;
+        }
+
+        .tech-item h4 {
+            font-size: 16px;
+            color: var(--dark-text);
+        }
+
+        .faq-section {
+            background: var(--white);
+            padding: 80px 0;
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 60px auto 0;
+        }
+
+        .faq-item {
+            background: var(--white);
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--dark-text);
+            transition: all 0.3s;
+        }
+
+        .faq-question:hover {
+            background: var(--light-bg);
+        }
+
+        .faq-question i {
+            color: var(--secondary-blue);
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer-content {
+            padding: 0 24px 24px;
+            color: var(--gray-text);
+            line-height: 1.7;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            padding: 80px 0;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            margin-bottom: 32px;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-white {
+            background: var(--white);
+            color: var(--primary-blue);
+        }
+
+        .cta-white:hover {
+            background: var(--light-bg);
+        }
+
+        footer {
+            background: var(--dark-text);
+            color: var(--white);
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 48px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 20px;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+                background: none;
+                border: none;
+                font-size: 24px;
+                cursor: pointer;
+                color: var(--primary-blue);
+            }
+
+            .page-hero h1 {
+                font-size: 32px;
+            }
+
+            .page-hero p {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+   <header>
+        <nav class="container">
+            <img src="https://www.corefinity.com/images/logo.svg" alt="Corefinity Logo" style="height: 40px;">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Solutions <i
+                            class="fas fa-chevron-down"></i></a>
+                    <div class="mega-menu">
+                        <div class="mega-column">
+                            <h3><i class="fab fa-magento"></i> Magento Hosting</h3>
+                            <p>Optimized hosting for Magento 2 e-commerce platforms with enterprise-grade performance.
+                            </p>
+                            <a href="solution.html" class="mega-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="mega-column">
+                            <h3><i class="fab fa-laravel"></i> Laravel Hosting</h3>
+                            <p>High-performance hosting for Laravel applications with advanced caching and scaling.</p>
+                            <a href="laravel.html" class="mega-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="agency.html">Agency</a></li>
+                <li><a href="support.html">Support</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="tel:+88881234567" class="cta-button"><i class="fas fa-phone"></i> +8888-123-7008</a></li>
+            </ul>
+            <button class="mobile-menu">☰</button>
+        </nav>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1>Our <span class="highlight">Cloud Services</span></h1>
+            <p>Platform-agnostic infrastructure solutions designed for mission-critical and high-performance ecommerce
+                applications</p>
+        </div>
+    </section>
+
+    <section class="breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-nav">
+                <a href="#home">Home</a>
+                <span>/</span>
+                <span>Services</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-intro">
+        <div class="container">
+            <div class="intro-content">
+                <div class="section-label">WHAT WE OFFER</div>
+                <h2 class="section-title">Comprehensive Cloud Infrastructure Solutions</h2>
+                <p class="intro-text">At Corefinity, we specialize in delivering platform-agnostic cloud hosting and
+                    infrastructure management services. Our team of certified engineers and developers work around the
+                    clock to ensure your mission-critical applications run smoothly, securely, and at peak performance.
+                </p>
+                <p class="intro-text">Whether you're running a high-traffic ecommerce platform, enterprise application,
+                    or complex web service, we provide the expertise and infrastructure you need to scale with
+                    confidence.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-grid">
+        <div class="container">
+            <div class="section-header" style="text-align: center;">
+                <div class="section-label">CORE SERVICES</div>
+                <h2 class="section-title">What We Do Best</h2>
+            </div>
+            <div class="grid-container">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-cloud"></i></div>
+                    <h3>Cloud Hosting</h3>
+                    <p>Enterprise-grade cloud hosting solutions optimized for performance, reliability, and scalability
+                        across AWS, Google Cloud, and Azure.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> 99.99% uptime SLA</li>
+                        <li><i class="fas fa-check-circle"></i> Auto-scaling infrastructure</li>
+                        <li><i class="fas fa-check-circle"></i> Global CDN integration</li>
+                        <li><i class="fas fa-check-circle"></i> DDoS protection</li>
+                    </ul>
+                    <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-shopping-cart"></i></div>
+                    <h3>Magento Hosting</h3>
+                    <p>The fastest Magento hosting platform, custom-built with years of optimization and cutting-edge
+                        technology specifically for Magento 2.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> Optimized stack for Magento</li>
+                        <li><i class="fas fa-check-circle"></i> Redis & Varnish caching</li>
+                        <li><i class="fas fa-check-circle"></i> ElasticSearch integration</li>
+                        <li><i class="fas fa-check-circle"></i> 24/7 Magento experts</li>
+                    </ul>
+                    <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-lock"></i></div>
+                    <h3>Security & Compliance</h3>
+                    <p>Comprehensive security solutions including PCI DSS compliance, SSL management, and proactive
+                        threat monitoring.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> Full PCI compliance</li>
+                        <li><i class="fas fa-check-circle"></i> SSL certificates included</li>
+                        <li><i class="fas fa-check-circle"></i> Web application firewall</li>
+                        <li><i class="fas fa-check-circle"></i> Security audits & reports</li>
+                    </ul>
+                    <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-database"></i></div>
+                    <h3>Database Management</h3>
+                    <p>Expert database administration, optimization, and monitoring for MySQL, PostgreSQL, and MongoDB
+                        databases.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> Performance tuning</li>
+                        <li><i class="fas fa-check-circle"></i> Automated backups</li>
+                        <li><i class="fas fa-check-circle"></i> Replication setup</li>
+                        <li><i class="fas fa-check-circle"></i> Query optimization</li>
+                    </ul>
+                    <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-rocket"></i></div>
+                    <h3>Performance Optimization</h3>
+                    <p>End-to-end performance optimization services to ensure your applications deliver lightning-fast
+                        user experiences.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> Code profiling & analysis</li>
+                        <li><i class="fas fa-check-circle"></i> Caching strategies</li>
+                        <li><i class="fas fa-check-circle"></i> Image optimization</li>
+                        <li><i class="fas fa-check-circle"></i> Load testing</li>
+                    </ul>
+                    <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-headset"></i></div>
+                    <h3>24/7 Support</h3>
+                    <p>Round-the-clock expert support from our team of certified engineers with an average emergency
+                        response time of 7 minutes.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> 24/7/365 availability</li>
+                        <li><i class="fas fa-check-circle"></i> 7-minute response time</li>
+                        <li><i class="fas fa-check-circle"></i> Dedicated account manager</li>
+                        <li><i class="fas fa-check-circle"></i> Proactive monitoring</li>
+                    </ul>
+                    <a href="#" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing-section">
+        <div class="container">
+            <div class="section-header" style="text-align: center;">
+                <div class="section-label">PRICING PLANS</div>
+                <h2 class="section-title">Flexible Plans for Every Business</h2>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <div class="pricing-amount">$299<span>/mo</span></div>
+                    <div class="pricing-period">Perfect for growing businesses</div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> 2 CPU Cores</li>
+                        <li><i class="fas fa-check"></i> 4GB RAM</li>
+                        <li><i class="fas fa-check"></i> 100GB SSD Storage</li>
+                        <li><i class="fas fa-check"></i> 2TB Bandwidth</li>
+                        <li><i class="fas fa-check"></i> Free SSL Certificate</li>
+                        <li><i class="fas fa-check"></i> Daily Backups</li>
+                        <li><i class="fas fa-check"></i> 24/7 Support</li>
+                    </ul>
+                    <a href="#contact" class="secondary-button">Get Started</a>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Most Popular</div>
+                    <h3>Professional</h3>
+                    <div class="pricing-amount">$599<span>/mo</span></div>
+                    <div class="pricing-period">For established ecommerce</div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> 4 CPU Cores</li>
+                        <li><i class="fas fa-check"></i> 8GB RAM</li>
+                        <li><i class="fas fa-check"></i> 250GB SSD Storage</li>
+                        <li><i class="fas fa-check"></i> 5TB Bandwidth</li>
+                        <li><i class="fas fa-check"></i> Free SSL Certificate</li>
+                        <li><i class="fas fa-check"></i> Hourly Backups</li>
+                        <li><i class="fas fa-check"></i> Priority Support</li>
+                        <li><i class="fas fa-check"></i> Performance Monitoring</li>
+                    </ul>
+                    <a href="#contact" class="cta-button">Get Started</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="pricing-amount">Custom</div>
+                    <div class="pricing-period">For high-traffic sites</div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Custom CPU Cores</li>
+                        <li><i class="fas fa-check"></i> Custom RAM</li>
+                        <li><i class="fas fa-check"></i> Custom Storage</li>
+                        <li><i class="fas fa-check"></i> Unlimited Bandwidth</li>
+                        <li><i class="fas fa-check"></i> Advanced SSL</li>
+                        <li><i class="fas fa-check"></i> Real-time Backups</li>
+                        <li><i class="fas fa-check"></i> Dedicated Support Team</li>
+                        <li><i class="fas fa-check"></i> SLA Guarantee</li>
+                    </ul>
+                    <a href="#contact" class="secondary-button">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="process-section">
+        <div class="container">
+            <div class="section-header" style="text-align: center;">
+                <div class="section-label">HOW IT WORKS</div>
+                <h2 class="section-title">Our Onboarding Process</h2>
+            </div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>Consultation</h3>
+                    <p>We analyze your current infrastructure, understand your requirements, and recommend the best
+                        solution for your needs.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>Planning</h3>
+                    <p>Our team designs a custom architecture tailored to your application, ensuring optimal performance
+                        and scalability.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>Migration</h3>
+                    <p>Seamless migration of your application with zero downtime, handled by our experienced engineers.
+                    </p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>Optimization</h3>
+                    <p>Fine-tuning and performance optimization to ensure your application runs at peak efficiency.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <h3>Ongoing Support</h3>
+                    <p>24/7 monitoring, maintenance, and support to keep your infrastructure running smoothly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-choose">
+        <div class="container">
+            <div class="section-header" style="text-align: center;">
+                <div class="section-label">WHY CHOOSE US</div>
+                <h2 class="section-title">The Corefinity Advantage</h2>
+            </div>
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="why-icon"><i class="fas fa-award"></i></div>
+                    <h3>Certified Experts</h3>
+                    <p>Our team holds certifications from AWS, Google Cloud, Azure, and leading ecommerce platforms.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon"><i class="fas fa-clock"></i></div>
+                    <h3>7-Minute Response</h3>
+                    <p>Industry-leading average emergency response time of just 7 minutes, 24/7/365.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>99.99% Uptime</h3>
+                    <p>Our SLA-backed uptime guarantee ensures your business is always online when it matters.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon"><i class="fas fa-globe"></i></div>
+                    <h3>Global Infrastructure</h3>
+                    <p>Deploy across 70+ locations worldwide for optimal performance and redundancy.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    <h3>Performance Focus</h3>
+                    <p>Years of optimization experience delivering the fastest Magento and ecommerce hosting.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon"><i class="fas fa-users"></i></div>
+                    <h3>Agency Friendly</h3>
+                    <p>We partner with agencies and developers, providing white-label solutions and technical expertise.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="technologies">
+        <div class="container">
+            <div class="section-header" style="text-align: center;">
+                <div class="section-label">TECHNOLOGIES</div>
+                <h2 class="section-title">Platforms & Technologies We Support</h2>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <i class="fab fa-aws"></i>
+                    <h4>AWS</h4>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-google"></i>
+                    <h4>Google Cloud</h4>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-microsoft"></i>
+                    <h4>Azure</h4>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-magento"></i>
+                    <h4>Magento</h4>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-wordpress"></i>
+                    <h4>WordPress</h4>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-shopify"></i>
+                    <h4>Shopware</h4>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-docker"></i>
+                    <h4>Docker</h4>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-kubernetes"></i>
+                    <h4>Kubernetes</h4>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-linux"></i>
+                    <h4>Linux</h4>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-database"></i>
+                    <h4>MySQL</h4>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-server"></i>
+                    <h4>Redis</h4>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-code"></i>
+                    <h4>Varnish</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header" style="text-align: center;">
+                <div class="section-label">FAQ</div>
+                <h2 class="section-title">Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What cloud platforms do you support?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            We are completely platform-agnostic and support all major cloud providers including AWS,
+                            Google Cloud Platform, and Microsoft Azure. We help you choose the right platform based on
+                            your specific requirements, budget, and technical needs.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you offer migration services?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes! We provide comprehensive migration services with zero downtime. Our experienced team
+                            handles the entire process from planning to execution, ensuring a seamless transition to our
+                            infrastructure.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What is your uptime guarantee?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            We offer a 99.99% uptime SLA across all our hosting plans. Our infrastructure is built with
+                            redundancy and failover mechanisms to ensure your applications remain available at all
+                            times.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is your support really 24/7?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Absolutely. Our support team is available 24 hours a day, 7 days a week, 365 days a year. We
+                            maintain an average emergency response time of just 7 minutes and our team never goes
+                            offline.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you handle PCI compliance?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes, all our hosting solutions are fully PCI DSS compliant. We also conduct monthly
+                            compliance reports and security audits to ensure your ecommerce platform meets all
+                            regulatory requirements.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I upgrade my plan later?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            Yes, our infrastructure is designed to scale with your business. You can upgrade your plan
+                            at any time, and we'll handle the transition seamlessly without any downtime.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Transform Your Infrastructure?</h2>
+            <p>Let's discuss how Corefinity can help scale your business with our platform-agnostic cloud solutions</p>
+            <div class="cta-buttons">
+                <a href="tel:+88881237008" class="cta-button cta-white">CALL US: +8888-123-7008</a>
+                <a href="#contact" class="cta-button">GET A FREE CONSULTATION</a>
+                <a href="tel:+441615058000" class="cta-button cta-white">CALL UK: +44 161 505 8000</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>QUICK LINKS</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#work">Our work</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#partners">Our Partners</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>SOLUTIONS</h4>
+                    <ul>
+                        <li><a href="#magento">Magento Hosting</a></li>
+                        <li><a href="#wordpress">WordPress Hosting</a></li>
+                        <li><a href="#ecommerce">E-commerce Hosting</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>UNITED KINGDOM</h4>
+                    <ul>
+                        <li><a href="tel:+441615058000">+44 161 505 8000</a></li>
+                        <li><a href="mailto:info@corefinity.com">info@corefinity.com</a></li>
+                        <li>Metro City House (Office Gate), Gateshead, Tyne and Wear, NE11 9DJ</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>UNITED STATES</h4>
+                    <ul>
+                        <li><a href="tel:+88881237008">+8888-123-7008</a></li>
+                        <li><a href="mailto:info@corefinity.com">info@corefinity.com</a></li>
+                        <li>750 Highway Lane (Office 204), Chattanooga, Tennessee, TN 37450</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Copyright © 2025 Corefinity Consulting Ltd. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    faqItems.forEach(i => i.classList.remove('active'));
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+
+            // Mobile menu toggle
+            const mobileMenuBtn = document.querySelector('.mobile-menu');
+            const navLinks = document.querySelector('.nav-links');
+            const dropdowns = document.querySelectorAll('.dropdown');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+
+            // Mobile dropdown toggle
+            dropdowns.forEach(dropdown => {
+                const toggle = dropdown.querySelector('.dropdown-toggle');
+                toggle.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        dropdown.classList.toggle('active');
+                    }
+                });
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                    navLinks.classList.remove('active');
+                    dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
