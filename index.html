@@ -4,1570 +4,1273 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoreFinity - Cloud & Infrastructure Specialists</title>
+    <title>Corefinity - Platform Agnostic Cloud & Infrastructure Specialists</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
-            box-sizing: border-box
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1e5ba8;
+            --secondary-blue: #4a9ff5;
+            --orange: #ff6b35;
+            --light-bg: #f8fafc;
+            --white: #ffffff;
+            --dark-text: #1a202c;
+            --gray-text: #4a5568;
+            --border-gray: #e2e8f0;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: #fff;
-            color: #1a1a1a;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--dark-text);
             line-height: 1.6;
-            overflow-x: hidden
         }
 
-        .nav {
-            position: fixed;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        header {
+            background: var(--white);
+            border-bottom: 1px solid var(--border-gray);
+            padding: 20px 0;
+            position: sticky;
             top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
             z-index: 1000;
-            padding: 1rem 5%;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #e5e5e5;
-            transition: all 0.3s
-        }
-
-        .nav.scrolled {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            padding: 0.7rem 5%
         }
 
         .logo {
-            font-size: 1.6rem;
+            font-size: 24px;
             font-weight: 700;
-            color: #000;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .logo img {
-            height: 40px;
-            width: auto;
-            transition: transform 0.3s ease;
-            filter: drop-shadow(0 2px 4px rgba(0, 155, 222, 0.3));
-        }
-
-        .logo:hover img {
-            transform: scale(1.1) rotate(5deg);
-            filter: drop-shadow(0 4px 8px rgba(0, 155, 222, 0.5));
-        }
-
-        .logo:hover {
-            color: #009bde;
+            color: var(--primary-blue);
         }
 
         .logo span {
-            transition: color 0.3s ease;
-        }
-
-        .logo i {
-            color: #009bde
+            color: var(--secondary-blue);
         }
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 32px;
+            list-style: none;
             align-items: center;
-            list-style: none
         }
 
         .nav-links a {
-            color: #666;
             text-decoration: none;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-            position: relative
+            color: var(--dark-text);
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         .nav-links a:hover {
-            color: #000
+            color: var(--primary-blue);
+            background: rgba(74, 159, 245, 0.1);
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #009bde;
-            transition: width 0.3s
-        }
-
-        .nav-links a:hover::after {
-            width: 100%
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #009bde, #009bde);
-            color: #fff;
-            padding: 0.7rem 1.8rem;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            font-size: 0.95rem;
+        .nav-links a.cta-button {
+            padding: 12px 28px;
+            background: var(--orange);
+            color: var(--white);
             font-weight: 600;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(0, 155, 222, 0.3)
+            border-radius: 25px;
         }
 
-        .btn-primary:hover {
+        .nav-links a.cta-button:hover {
+            background: #e85a28;
             transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(0, 155, 222, 0.4)
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
         }
 
-        .btn-secondary {
-            background: transparent;
-            border: 2px solid #009bde;
-            color: #009bde;
-            padding: 0.7rem 1.8rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.95rem;
+        .cta-button {
+            background: var(--orange);
+            color: var(--white);
+            padding: 12px 28px;
+            border-radius: 6px;
+            border: none;
             font-weight: 600;
-            transition: all 0.3s
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        .btn-secondary:hover {
-            background: #009bde;
-            color: #fff
+        .cta-button:hover {
+            background: #e85a28;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .mega-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--white);
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            min-width: 600px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .dropdown:hover .mega-menu,
+        .dropdown:focus-within .mega-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mega-column {
+            flex: 1;
+            padding: 0 15px;
+        }
+
+        .mega-column h3 {
+            color: var(--primary-blue);
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mega-column h3 i {
+            font-size: 20px;
+        }
+
+        .mega-column p {
+            color: var(--gray-text);
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .mega-link {
+            color: var(--secondary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: gap 0.3s;
+        }
+
+        .mega-link:hover {
+            gap: 8px;
+        }
+
+        .mobile-menu {
+            display: none;
         }
 
         .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 8rem 5% 4rem;
-            text-align: center;
-            background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+            background: linear-gradient(135deg, #f0f7ff 0%, #e6f2ff 100%);
+            padding: 100px 0;
             position: relative;
-            overflow: hidden
+            overflow: hidden;
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(0, 155, 222, 0.1), transparent);
-            animation: float 6s ease-in-out infinite
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -50%;
-            left: -20%;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(0, 155, 222, 0.1), transparent);
-            animation: float 8s ease-in-out infinite reverse
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%234a9ff5;stop-opacity:0.1"/><stop offset="100%" style="stop-color:%231e5ba8;stop-opacity:0.05"/></linearGradient></defs><rect width="800" height="600" fill="url(%23g)"/><path d="M400,100 L500,150 L450,250 L350,250 L300,150 Z" fill="%234a9ff5" opacity="0.2"/><circle cx="600" cy="200" r="80" fill="%231e5ba8" opacity="0.15"/><rect x="250" y="350" width="100" height="150" fill="%234a9ff5" opacity="0.2"/></svg>') no-repeat center;
+            background-size: contain;
+            opacity: 0.3;
         }
 
         .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
             position: relative;
-            z-index: 2
+            z-index: 1;
         }
 
-        .hero h1 {
-            font-size: 3.8rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            max-width: 900px;
-            line-height: 1.1;
-            animation: fadeInUp 0.8s ease
+        .hero-text h1 {
+            font-size: 48px;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            color: var(--dark-text);
         }
 
-        .hero h1 .highlight {
-            background: linear-gradient(135deg, #009bde, #009bde);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text
+        .hero-text h1 .highlight {
+            color: var(--secondary-blue);
         }
 
-        .hero p {
-            font-size: 1.25rem;
-            color: #666;
-            margin-bottom: 2.5rem;
-            max-width: 700px;
-            animation: fadeInUp 0.8s ease 0.2s backwards
+        .hero-text p {
+            font-size: 20px;
+            color: var(--gray-text);
+            margin-bottom: 32px;
+            line-height: 1.7;
         }
 
         .hero-buttons {
             display: flex;
-            gap: 1rem;
-            justify-content: center;
-            animation: fadeInUp 0.8s ease 0.4s backwards
-        }
-
-        .trust-section {
-            padding: 3rem 5%;
-            background: #fff;
-            border-bottom: 1px solid #e5e5e5
-        }
-
-        .trust-content {
-            text-align: center
-        }
-
-        .trust-content p {
-            color: #999;
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 1px
-        }
-
-        .trust-logos {
-            display: flex;
-            justify-content: center;
-            gap: 4rem;
+            gap: 16px;
             flex-wrap: wrap;
-            align-items: center
         }
 
-        .trust-logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.3rem;
-            color: #666;
+        .secondary-button {
+            background: var(--white);
+            color: var(--primary-blue);
+            padding: 12px 28px;
+            border: 2px solid var(--primary-blue);
+            border-radius: 6px;
             font-weight: 600;
+            cursor: pointer;
             transition: all 0.3s;
-            opacity: 0;
-            animation: fadeIn 0.6s ease forwards
+            text-decoration: none;
+            display: inline-block;
         }
 
-        .trust-logo i {
-            font-size: 1.8rem;
-            color: #009bde
+        .secondary-button:hover {
+            background: var(--primary-blue);
+            color: var(--white);
         }
 
-        .trust-logo:hover {
-            transform: translateY(-3px);
-            color: #000
+        .cloud-logos {
+            display: flex;
+            gap: 24px;
+            margin-top: 32px;
+            align-items: center;
         }
 
-        .trust-logo:nth-child(1) {
-            animation-delay: 0.1s
+        .cloud-logo {
+            background: var(--white);
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            font-weight: 600;
+            color: var(--gray-text);
+            font-size: 14px;
         }
 
-        .trust-logo:nth-child(2) {
-            animation-delay: 0.2s
+        .hero-visual {
+            position: relative;
         }
 
-        .trust-logo:nth-child(3) {
-            animation-delay: 0.3s
+        .hero-visual img {
+            max-width: 100%;
+            height: auto;
         }
 
-        .trust-logo:nth-child(4) {
-            animation-delay: 0.4s
+        .platforms {
+            background: var(--white);
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border-gray);
         }
 
-        .trust-logo:nth-child(5) {
-            animation-delay: 0.5s
+        .platforms h3 {
+            text-align: center;
+            color: var(--gray-text);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 32px;
         }
 
-        .section {
-            padding: 6rem 5%
+        .platform-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+
+        .platform-logos span {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--gray-text);
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .platform-logos span:hover {
+            opacity: 1;
+        }
+
+        .strategy-section {
+            background: var(--light-bg);
+            padding: 100px 0;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 4rem;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards
+            margin-bottom: 60px;
         }
 
-        .section-header.animate {
-            opacity: 1
+        .section-label {
+            color: var(--secondary-blue);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            margin-bottom: 16px;
         }
 
-        .section-header h2 {
-            font-size: 2.8rem;
-            margin-bottom: 1rem;
-            font-weight: 700
+        .section-title {
+            font-size: 42px;
+            color: var(--dark-text);
+            font-weight: 700;
         }
 
-        .section-header p {
-            color: #666;
-            font-size: 1.15rem;
-            max-width: 600px;
-            margin: 0 auto
-        }
-
-        .cards-grid {
+        .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto
+            gap: 32px;
         }
 
-        .card {
-            background: #fff;
-            border: 1px solid #e5e5e5;
-            border-radius: 16px;
-            padding: 2.5rem;
-            transition: all 0.4s;
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards
+        .feature-card {
+            background: var(--white);
+            padding: 40px 32px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s;
+            border: 1px solid var(--border-gray);
         }
 
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-            border-color: #009bde
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
         }
 
-        .card-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #009bde, #009bde);
-            border-radius: 16px;
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.5rem;
-            transition: all 0.3s
+            margin-bottom: 24px;
+            color: var(--white);
+            font-size: 28px;
         }
 
-        .card:hover .card-icon {
-            transform: scale(1.1) rotate(5deg)
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 16px;
+            color: var(--dark-text);
         }
 
-        .card-icon i {
-            font-size: 2rem;
-            color: #fff
+        .feature-card p {
+            color: var(--gray-text);
+            line-height: 1.7;
+            margin-bottom: 16px;
         }
 
-        .card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 0.8rem;
-            font-weight: 600
+        .feature-link {
+            color: var(--secondary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s;
         }
 
-        .card p {
-            color: #666;
-            font-size: 0.95rem;
-            line-height: 1.7
+        .feature-link:hover {
+            gap: 12px;
         }
 
-        .card:nth-child(1) {
-            animation-delay: 0.1s
+        .why-section {
+            background: var(--white);
+            padding: 100px 0;
         }
 
-        .card:nth-child(2) {
-            animation-delay: 0.2s
+        .why-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
         }
 
-        .card:nth-child(3) {
-            animation-delay: 0.3s
+        .why-text h2 {
+            font-size: 42px;
+            margin-bottom: 24px;
+            line-height: 1.2;
         }
 
-        .card:nth-child(4) {
-            animation-delay: 0.4s
+        .why-text h2 .highlight {
+            color: var(--secondary-blue);
         }
 
-        .stats {
-            background: linear-gradient(135deg, #009bde, #009bde);
-            color: #fff;
-            text-align: center
+        .why-text p {
+            color: var(--gray-text);
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 16px;
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 3rem;
-            max-width: 1200px;
-            margin: 0 auto
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
         }
 
-        .stat {
-            padding: 1rem;
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards
+        .stat-card {
+            background: var(--light-bg);
+            padding: 32px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid var(--border-gray);
+            transition: all 0.3s;
         }
 
-        .stat i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            opacity: 0.9
+        .stat-card:hover {
+            border-color: var(--secondary-blue);
+            transform: translateY(-4px);
         }
 
-        .stat h3 {
-            font-size: 2.8rem;
+        .stat-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .stat-value {
+            font-size: 32px;
             font-weight: 700;
-            margin-bottom: 0.5rem
+            color: var(--primary-blue);
+            margin-bottom: 8px;
         }
 
-        .stat p {
-            opacity: 0.9;
-            font-size: 1.05rem
+        .stat-label {
+            color: var(--gray-text);
+            font-weight: 600;
+            font-size: 14px;
         }
 
-        .stat:nth-child(1) {
-            animation-delay: 0.1s
+        .key-metrics {
+            background: var(--light-bg);
+            padding: 100px 0;
         }
 
-        .stat:nth-child(2) {
-            animation-delay: 0.2s
-        }
-
-        .stat:nth-child(3) {
-            animation-delay: 0.3s
-        }
-
-        .stat:nth-child(4) {
-            animation-delay: 0.4s
-        }
-
-        .platforms {
-            background: #f9fafb
-        }
-
-        .platform-grid {
+        .metrics-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            max-width: 1000px;
-            margin: 0 auto
+            gap: 32px;
+            margin-top: 60px;
         }
 
-        .platform-card {
-            background: #fff;
+        .metric-card {
+            background: var(--white);
+            padding: 40px;
             border-radius: 12px;
-            padding: 2rem;
             text-align: center;
-            border: 1px solid #e5e5e5;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
             transition: all 0.3s;
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards
         }
 
-        .platform-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08)
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
         }
 
-        .platform-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: #009bde
-        }
-
-        .platform-card h3 {
-            font-size: 1.2rem;
-            font-weight: 600
-        }
-
-        .platform-card:nth-child(1) {
-            animation-delay: 0.1s
-        }
-
-        .platform-card:nth-child(2) {
-            animation-delay: 0.2s
-        }
-
-        .platform-card:nth-child(3) {
-            animation-delay: 0.3s
-        }
-
-        .platform-card:nth-child(4) {
-            animation-delay: 0.4s
-        }
-
-        .workflow {
-            background: #fff
-        }
-
-        .workflow-steps {
-            max-width: 900px;
-            margin: 0 auto
-        }
-
-        .step {
-            display: flex;
-            gap: 2rem;
-            margin-bottom: 3rem;
-            align-items: start;
-            opacity: 0;
-            animation: fadeInLeft 0.6s ease forwards
-        }
-
-        .step-number {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #009bde, #009bde);
-            color: #fff;
+        .metric-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 1.5rem;
-            flex-shrink: 0;
-            box-shadow: 0 5px 20px rgba(0, 155, 222, 0.3)
+            margin: 0 auto 24px;
+            color: var(--white);
+            font-size: 36px;
         }
 
-        .step-content h3 {
-            font-size: 1.4rem;
-            margin-bottom: 0.8rem;
-            font-weight: 600
+        .metric-card h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: var(--dark-text);
         }
 
-        .step-content p {
-            color: #666;
-            line-height: 1.7
+        .metric-card p {
+            color: var(--gray-text);
+            line-height: 1.6;
         }
 
-        .step:nth-child(1) {
-            animation-delay: 0.1s
+        .performance-section {
+            background: var(--white);
+            padding: 100px 0;
         }
 
-        .step:nth-child(2) {
-            animation-delay: 0.2s
-        }
-
-        .step:nth-child(3) {
-            animation-delay: 0.3s
-        }
-
-        .step:nth-child(4) {
-            animation-delay: 0.4s
-        }
-
-        .features-detailed {
-            background: #f9fafb
-        }
-
-        .feature-row {
-            display: flex;
-            gap: 4rem;
+        .performance-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
             align-items: center;
-            margin-bottom: 5rem;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards
+            margin-top: 60px;
         }
 
-        .feature-row:nth-child(even) {
-            flex-direction: row-reverse
+        .performance-visual {
+            background: var(--light-bg);
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
         }
 
-        .feature-image {
-            flex: 1;
-            background: linear-gradient(135deg, #e0e7ff, #ddd6fe);
-            border-radius: 20px;
-            padding: 3rem;
+        .performance-bar {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .bar-header {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 300px
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-weight: 600;
         }
 
-        .feature-image i {
-            font-size: 8rem;
-            color: #009bde;
-            opacity: 0.3
+        .bar-fill {
+            height: 12px;
+            background: linear-gradient(90deg, var(--secondary-blue), var(--primary-blue));
+            border-radius: 6px;
+            transition: width 0.5s;
         }
 
-        .feature-content {
-            flex: 1
+        .performance-features {
+            list-style: none;
         }
 
-        .feature-content h3 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            font-weight: 700
-        }
-
-        .feature-content p {
-            color: #666;
-            font-size: 1.05rem;
-            line-height: 1.8;
-            margin-bottom: 1.5rem
-        }
-
-        .feature-list {
-            list-style: none
-        }
-
-        .feature-list li {
+        .performance-features li {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border-gray);
             display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            color: #666
+            gap: 12px;
         }
 
-        .feature-list li i {
-            color: #009bde;
-            font-size: 1.2rem
+        .performance-features li:last-child {
+            border-bottom: none;
+        }
+
+        .performance-features i {
+            color: var(--secondary-blue);
+            font-size: 20px;
         }
 
         .testimonials {
-            background: #fff
+            background: var(--light-bg);
+            padding: 100px 0;
         }
 
-        .testimonial-grid {
+        .testimonial-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto
+            gap: 32px;
+            margin-top: 60px;
         }
 
         .testimonial-card {
-            background: #f9fafb;
-            border-radius: 16px;
-            padding: 2.5rem;
-            border: 1px solid #e5e5e5;
-            transition: all 0.3s;
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08)
-        }
-
-        .quote-icon {
-            font-size: 2.5rem;
-            color: #009bde;
-            opacity: 0.3;
-            margin-bottom: 1rem
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            border-left: 4px solid var(--secondary-blue);
         }
 
         .testimonial-text {
-            font-size: 1.05rem;
+            font-size: 18px;
             line-height: 1.8;
-            margin-bottom: 2rem;
-            color: #333
+            color: var(--gray-text);
+            margin-bottom: 24px;
+            font-style: italic;
         }
 
         .testimonial-author {
             display: flex;
             align-items: center;
-            gap: 1rem
+            gap: 16px;
         }
 
         .author-avatar {
-            width: 50px;
-            height: 50px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #009bde, #009bde);
+            background: linear-gradient(135deg, var(--secondary-blue), var(--primary-blue));
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #fff;
+            color: var(--white);
             font-weight: 700;
-            font-size: 1.2rem
+            font-size: 20px;
         }
 
         .author-info h4 {
-            margin-bottom: 0.3rem;
-            font-weight: 600
+            font-size: 16px;
+            margin-bottom: 4px;
         }
 
         .author-info p {
-            color: #999;
-            font-size: 0.9rem
+            color: var(--gray-text);
+            font-size: 14px;
         }
 
-        .testimonial-card:nth-child(1) {
-            animation-delay: 0.1s
+        .trusted-by {
+            background: var(--white);
+            padding: 80px 0;
         }
 
-        .testimonial-card:nth-child(2) {
-            animation-delay: 0.2s
-        }
-
-        .pricing {
-            background: #f9fafb
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 1100px;
-            margin: 0 auto
-        }
-
-        .pricing-card {
-            background: #fff;
-            border: 2px solid #e5e5e5;
-            border-radius: 16px;
-            padding: 2.5rem;
-            text-align: center;
-            transition: all 0.3s;
-            opacity: 0;
-            animation: fadeInUp 0.6s ease forwards
-        }
-
-        .pricing-card.featured {
-            border-color: #009bde;
-            transform: scale(1.05);
-            box-shadow: 0 15px 40px rgba(0, 155, 222, 0.2)
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1)
-        }
-
-        .pricing-card.featured:hover {
-            transform: translateY(-5px) scale(1.05)
-        }
-
-        .pricing-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #009bde, #009bde);
-            color: #fff;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 1rem
-        }
-
-        .pricing-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700
-        }
-
-        .pricing-card .price {
-            font-size: 3rem;
-            font-weight: 700;
-            margin: 1.5rem 0;
-            color: #009bde
-        }
-
-        .pricing-card .price span {
-            font-size: 1rem;
-            color: #666
-        }
-
-        .pricing-features {
-            list-style: none;
-            margin-bottom: 2rem;
-            text-align: left
-        }
-
-        .pricing-features li {
-            padding: 0.8rem 0;
-            border-bottom: 1px solid #f0f0f0;
+        .client-logos {
             display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            color: #666
-        }
-
-        .pricing-features li i {
-            color: #009bde;
-            font-size: 1.1rem
-        }
-
-        .pricing-card:nth-child(1) {
-            animation-delay: 0.1s
-        }
-
-        .pricing-card:nth-child(2) {
-            animation-delay: 0.2s
-        }
-
-        .pricing-card:nth-child(3) {
-            animation-delay: 0.3s
-        }
-
-        .contact {
-            background: #fff
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 4rem;
-            max-width: 1200px;
-            margin: 0 auto
-        }
-
-        .contact-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            font-weight: 600
-        }
-
-        .contact-info p {
-            color: #666;
-            margin-bottom: 2rem
-        }
-
-        .contact-details {
-            list-style: none
-        }
-
-        .contact-details li {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            color: #666
-        }
-
-        .contact-details li i {
-            width: 40px;
-            height: 40px;
-            background: #f0f0f0;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
             justify-content: center;
-            color: #009bde
+            align-items: center;
+            gap: 48px;
+            flex-wrap: wrap;
+            margin-top: 40px;
         }
 
-        .contact-form {
-            background: #f9fafb;
-            border-radius: 16px;
-            padding: 2.5rem
+        .client-logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--gray-text);
+            opacity: 0.6;
+            transition: opacity 0.3s;
         }
 
-        .contact-form h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            font-weight: 600
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 1px solid #e5e5e5;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #009bde;
-            box-shadow: 0 0 0 3px rgba(0, 155, 222, 0.1)
-        }
-
-        .form-group textarea {
-            height: 120px;
-            resize: vertical
+        .client-logo:hover {
+            opacity: 1;
         }
 
         .cta-section {
-            background: linear-gradient(135deg, #1e1b4b, #312e81);
-            color: #fff;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            padding: 80px 0;
             text-align: center;
-            padding: 6rem 5%;
-            position: relative;
-            overflow: hidden
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(0, 155, 222, 0.3), transparent);
-            animation: pulse 4s ease-in-out infinite
+            color: var(--white);
         }
 
         .cta-section h2 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 2
-        }
-
-        .cta-section p {
-            font-size: 1.2rem;
-            margin-bottom: 2.5rem;
-            opacity: 0.9;
-            position: relative;
-            z-index: 2
+            font-size: 36px;
+            margin-bottom: 32px;
         }
 
         .cta-buttons {
             display: flex;
+            gap: 16px;
             justify-content: center;
-            gap: 1rem;
-            position: relative;
-            z-index: 2
+            flex-wrap: wrap;
+        }
+
+        .cta-white {
+            background: var(--white);
+            color: var(--primary-blue);
+        }
+
+        .cta-white:hover {
+            background: var(--light-bg);
         }
 
         footer {
-            background: #0a0a0a;
-            color: #fff;
-            padding: 4rem 5% 2rem
+            background: var(--dark-text);
+            color: var(--white);
+            padding: 60px 0 20px;
         }
 
-        .footer-grid {
+        .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem
+            gap: 48px;
+            margin-bottom: 40px;
         }
 
-        .footer-col h3 {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-            font-weight: 600
+        .footer-section h4 {
+            margin-bottom: 20px;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .footer-col ul {
-            list-style: none
+        .footer-section ul {
+            list-style: none;
         }
 
-        .footer-col ul li {
-            margin-bottom: 1rem
+        .footer-section ul li {
+            margin-bottom: 12px;
         }
 
-        .footer-col ul li a {
-            color: #999;
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
             text-decoration: none;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem
+            transition: color 0.3s;
         }
 
-        .footer-col ul li a:hover {
-            color: #fff;
-            padding-left: 5px
-        }
-
-        .footer-col ul li a i {
-            font-size: 0.8rem;
-            color: #009bde
+        .footer-section a:hover {
+            color: var(--white);
         }
 
         .footer-bottom {
             text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid #333;
-            color: #666;
-            font-size: 0.9rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
         }
 
-        .social-links {
-            display: flex;
-            gap: 1rem
-        }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #1a1a1a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-            transition: all 0.3s
-        }
-
-        .social-links a:hover {
-            background: #009bde;
-            color: #fff;
-            transform: translateY(-3px)
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px)
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0)
-            }
-        }
-
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px)
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0)
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0
-            }
-
-            to {
-                opacity: 1
-            }
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0)
-            }
-
-            50% {
-                transform: translateY(-20px)
-            }
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 1;
-                transform: scale(1)
-            }
-
-            50% {
-                opacity: 0.8;
-                transform: scale(1.1)
-            }
-        }
-
-        @media(max-width:768px) {
+        @media (max-width: 768px) {
             .nav-links {
-                display: none
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             }
 
-            .hero h1 {
-                font-size: 2.2rem
+            .nav-links.active {
+                display: flex;
             }
 
-            .hero p {
-                font-size: 1.05rem
+            .mobile-menu {
+                display: block;
+                background: none;
+                border: none;
+                font-size: 24px;
+                cursor: pointer;
+                color: var(--primary-blue);
+            }
+
+            .mega-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                display: none;
+                min-width: auto;
+                box-shadow: none;
+                border: none;
+                padding: 10px 0;
+                background: var(--light-bg);
+            }
+
+            .dropdown.active .mega-menu {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .mega-column {
+                padding: 10px 0;
+                border-bottom: 1px solid var(--border-gray);
+            }
+
+            .mega-column:last-child {
+                border-bottom: none;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero-text h1 {
+                font-size: 36px;
+            }
+
+            .hero-text p {
+                font-size: 18px;
+            }
+
+            .why-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .performance-content {
+                grid-template-columns: 1fr;
             }
 
             .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 2rem
+                grid-template-columns: 1fr;
             }
 
-            .cards-grid,
-            .platform-grid,
-            .testimonial-grid,
-            .pricing-grid {
-                grid-template-columns: 1fr
+            .features-grid {
+                grid-template-columns: 1fr;
             }
 
-            .feature-row,
-            .feature-row:nth-child(even) {
-                flex-direction: column
+            .section-title {
+                font-size: 32px;
             }
 
-            .footer-bottom {
-                flex-direction: column;
-                gap: 1rem
+            .why-text h2 {
+                font-size: 32px;
             }
 
-            .contact-grid {
-                grid-template-columns: 1fr
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 32px;
             }
         }
     </style>
 </head>
 
 <body>
-
-    <nav class="nav" id="navbar">
-        <div class="logo">
-            <img src="image.png" alt="CoreFinity Logo">
-         
-        </div>
-        <ul class="nav-links">
-            <li><a href="#solutions">Solutions</a></li>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#testimonials">Reviews</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <button class="btn-primary">Get Started</button>
-    </nav>
+    <header>
+        <nav class="container">
+            <img src="https://www.corefinity.com/images/logo.svg" alt="Corefinity Logo" style="height: 40px;">
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Solutions <i
+                            class="fas fa-chevron-down"></i></a>
+                    <div class="mega-menu">
+                        <div class="mega-column">
+                            <h3><i class="fab fa-magento"></i> Magento Hosting</h3>
+                            <p>Optimized hosting for Magento 2 e-commerce platforms with enterprise-grade performance.
+                            </p>
+                            <a href="solution.html" class="mega-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="mega-column">
+                            <h3><i class="fab fa-laravel"></i> Laravel Hosting</h3>
+                            <p>High-performance hosting for Laravel applications with advanced caching and scaling.</p>
+                            <a href="laravel.html" class="mega-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="agency.html">Agency</a></li>
+                <li><a href="support.html">Support</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="tel:+88881234567" class="cta-button"><i class="fas fa-phone"></i> +8888-123-7008</a></li>
+            </ul>
+            <button class="mobile-menu">☰</button>
+        </nav>
+    </header>
 
     <section class="hero">
-        <div class="hero-content">
-            <h1>Platform Agnostic <span class="highlight">Cloud & Infrastructure</span> Specialists</h1>
-            <p>Modernizing hosting mission-critical and ecommerce applications with enterprise-grade performance and
-                24/7 expert support</p>
-            <div class="hero-buttons">
-                <button class="btn-primary"><i class="fas fa-rocket"></i> Start Free Trial</button>
-                <button class="btn-secondary"><i class="fas fa-comments"></i> Talk to Expert</button>
-            </div>
-        </div>
-    </section>
-
-    <section class="trust-section">
-        <div class="trust-content">
-            <p>Trusted by Industry Leaders</p>
-            <div class="trust-logos">
-                <div class="trust-logo">
-                    <i class="fab fa-aws"></i>
-                    AWS
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>We are <span class="highlight">platform agnostic</span> cloud and infrastructure specialists
+                    </h1>
+                    <p>Modernizing hosting mission-critical and/or ecommerce applications with unmatched reliability and
+                        performance.</p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="cta-button"><i class="fas fa-rocket"></i> GET STARTED</a>
+                        <a href="#experts" class="secondary-button"><i class="fas fa-comments"></i> CHAT TO AN
+                            EXPERT</a>
+                    </div>
+                    <div class="cloud-logos">
+                        <span class="cloud-logo"><i class="fab fa-google"></i> GCP</span>
+                        <span class="cloud-logo"><i class="fab fa-aws"></i> AWS</span>
+                        <span class="cloud-logo"><i class="fab fa-microsoft"></i> Azure</span>
+                    </div>
                 </div>
-                <div class="trust-logo">
-                    <i class="fab fa-google"></i>
-                    Google Cloud
-                </div>
-                <div class="trust-logo">
-                    <i class="fab fa-microsoft"></i>
-                    Azure
-                </div>
-                <div class="trust-logo">
-                    <i class="fab fa-magento"></i>
-                    Magento
-                </div>
-                <div class="trust-logo">
-                    <i class="fas fa-shopping-bag"></i>
-                    Shopware
+                <div class="hero-visual">
+                    <img src="https://www.corefinity.com/images/home-top-01.svg" alt="Corefinity Cloud Infrastructure">
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section">
-        <div class="section-header">
-            <h2>Why Choose CoreFinity</h2>
-            <p>Enterprise-grade infrastructure with unmatched performance and reliability</p>
-        </div>
-        <div class="cards-grid">
-            <div class="card">
-                <div class="card-icon">
-                    <i class="fas fa-bolt"></i>
-                </div>
-                <h3>Fastest Hosting</h3>
-                <p>Developed a stack focused on performance through years of unique simulations and optimization of
-                    cutting-edge software</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">
-                    <i class="fas fa-star"></i>
-                </div>
-                <h3>Fully Featured</h3>
-                <p>CoreFinity stack has been created as a full featured offering to take care of all your needs when
-                    hosting an e-commerce platform</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <h3>PCI Compliant</h3>
-                <p>Secure, slick and packaged environment ensures a fully PCI compliant site with enterprise-grade
-                    security</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">
-                    <i class="fas fa-globe"></i>
-                </div>
-                <h3>Global Presence</h3>
-                <p>Leveraging cloud platforms such as Google Compute, AWS and Azure with presence in over 90 regions
-                    worldwide</p>
+    <section class="platforms">
+        <div class="container">
+            <h3>Supported Platforms:</h3>
+            <div class="platform-logos">
+                <span><i class="fab fa-magento"></i> Magento</span>
+                <span><i class="fas fa-store"></i> Shopware</span>
+                <span><i class="fab fa-wordpress"></i> WordPress</span>
+                <span><i class="fas fa-bolt"></i> ORO</span>
             </div>
         </div>
     </section>
 
-    <section class="section stats">
-        <div class="stats-grid">
-            <div class="stat">
-                <i class="fas fa-headset"></i>
-                <h3>24/7/365</h3>
-                <p>Always Online Support</p>
+    <section class="strategy-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">LET US REDEFINE YOUR</div>
+                <h2 class="section-title">CLOUD STRATEGY</h2>
             </div>
-            <div class="stat">
-                <i class="fas fa-check-circle"></i>
-                <h3>99.99%</h3>
-                <p>Uptime Guarantee</p>
-            </div>
-            <div class="stat">
-                <i class="fas fa-clock"></i>
-                <h3>7 Min</h3>
-                <p>Avg Emergency Response</p>
-            </div>
-            <div class="stat">
-                <i class="fas fa-trophy"></i>
-                <h3>Fastest</h3>
-                <p>Magento Hosting</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section platforms">
-        <div class="section-header">
-            <h2>Supported Platforms</h2>
-            <p>We specialize in hosting the world's leading ecommerce platforms</p>
-        </div>
-        <div class="platform-grid">
-            <div class="platform-card">
-                <div class="platform-icon"><i class="fab fa-magento"></i></div>
-                <h3>Magento</h3>
-            </div>
-            <div class="platform-card">
-                <div class="platform-icon"><i class="fab fa-wordpress"></i></div>
-                <h3>WordPress</h3>
-            </div>
-            <div class="platform-card">
-                <div class="platform-icon"><i class="fas fa-shopping-cart"></i></div>
-                <h3>Shopware</h3>
-            </div>
-            <div class="platform-card">
-                <div class="platform-icon"><i class="fas fa-cubes"></i></div>
-                <h3>ORO Commerce</h3>
-            </div>
-        </div>
-    </section>
-
-    <section class="section workflow" id="solutions">
-        <div class="section-header">
-            <h2>How It Works</h2>
-            <p>Simple process to get you started in minutes</p>
-        </div>
-        <div class="workflow-steps">
-            <div class="step">
-                <div class="step-number">1</div>
-                <div class="step-content">
-                    <h3>Choose Your Platform</h3>
-                    <p>Select from Magento, WordPress, Shopware or custom solutions tailored to your business needs and
-                        requirements</p>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>FASTEST MAGENTO HOSTING</h3>
+                    <p>We have developed a stack focused on performance through years of unique innovations and
+                        optimization of cutting edge open-source software.</p>
+                    <a href="#" class="feature-link">Find out more about The Stack <i
+                            class="fas fa-arrow-right"></i></a>
                 </div>
-            </div>
-            <div class="step">
-                <div class="step-number">2</div>
-                <div class="step-content">
-                    <h3>Migration & Setup</h3>
-                    <p>Our expert team handles the complete migration process with zero downtime, ensuring seamless
-                        transition</p>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-star"></i></div>
+                    <h3>FULLY FEATURED</h3>
+                    <p>Our Corefinity stack has been created as a full featured offering to ease all of your needs when
+                        hosting an e-commerce platform.</p>
+                    <a href="#" class="feature-link">Find out more about The Stack <i
+                            class="fas fa-arrow-right"></i></a>
                 </div>
-            </div>
-            <div class="step">
-                <div class="step-number">3</div>
-                <div class="step-content">
-                    <h3>Optimization</h3>
-                    <p>We continuously monitor and optimize your infrastructure for peak performance and maximum
-                        reliability</p>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>FULLY PCI COMPLIANT</h3>
+                    <p>Security is critical. Safeguard your customers and your enterprise with a fully PCI compliant
+                        site. We run monthly PCI/Compliance reports on all base stacks.</p>
+                    <a href="#" class="feature-link">Learn more <i class="fas fa-arrow-right"></i></a>
                 </div>
-            </div>
-            <div class="step">
-                <div class="step-number">4</div>
-                <div class="step-content">
-                    <h3>24/7 Support</h3>
-                    <p>Round-the-clock expert support to ensure your business never stops, with average response time of
-                        7 minutes</p>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-globe-americas"></i></div>
+                    <h3>GLOBAL PRESENCE</h3>
+                    <p>By partnering with cloud providers such as Google Compute, AWS and Azure, Corefinity offers a
+                        global presence in over 50 regions providing unmatched speed and scaling.</p>
+                    <a href="#" class="feature-link">Learn more <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section features-detailed" id="features">
-        <div class="section-header">
-            <h2>Enterprise Features</h2>
-            <p>Everything you need for mission-critical applications</p>
-        </div>
-        <div style="max-width:1200px;margin:0 auto">
-            <div class="feature-row">
-                <div class="feature-image">
-                    <i class="fas fa-server"></i>
+    <section class="key-metrics">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">OUR CAPABILITIES</div>
+                <h2 class="section-title">KEY METRICS</h2>
+            </div>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon"><i class="fas fa-tachometer-alt"></i></div>
+                    <h3>Lightning Fast Performance</h3>
+                    <p>Optimized infrastructure delivering sub-second response times for your applications</p>
                 </div>
-                <div class="feature-content">
-                    <h3>High-Performance Infrastructure</h3>
-                    <p>Built on cutting-edge technology stack optimized for maximum speed and reliability</p>
-                    <ul class="feature-list">
-                        <li><i class="fas fa-check"></i> SSD NVMe Storage</li>
-                        <li><i class="fas fa-check"></i> Advanced Caching Layer</li>
-                        <li><i class="fas fa-check"></i> CDN Integration</li>
-                        <li><i class="fas fa-check"></i> Load Balancing</li>
-                    </ul>
+                <div class="metric-card">
+                    <div class="metric-icon"><i class="fas fa-expand-arrows-alt"></i></div>
+                    <h3>Instant Scalability</h3>
+                    <p>Scale resources up or down automatically based on traffic demands without downtime</p>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon"><i class="fas fa-lock"></i></div>
+                    <h3>Advanced Security</h3>
+                    <p>Multi-layer security protocols including DDoS protection and SSL encryption</p>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Real-time Monitoring</h3>
+                    <p>24/7 infrastructure monitoring with instant alerts and proactive issue resolution</p>
                 </div>
             </div>
-            <div class="feature-row">
-                <div class="feature-image">
-                    <i class="fas fa-lock"></i>
+        </div>
+    </section>
+
+    <section class="performance-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">PERFORMANCE BENCHMARKS</div>
+                <h2 class="section-title">WHAT YOU GET WITH COREFINITY</h2>
+            </div>
+            <div class="performance-content">
+                <div class="performance-visual">
+                    <div class="performance-bar">
+                        <div class="bar-header">
+                            <span>Page Load Speed</span>
+                            <span>95/100</span>
+                        </div>
+                        <div class="bar-fill" style="width: 95%;"></div>
+                    </div>
+                    <div class="performance-bar">
+                        <div class="bar-header">
+                            <span>Server Response Time</span>
+                            <span>98/100</span>
+                        </div>
+                        <div class="bar-fill" style="width: 98%;"></div>
+                    </div>
+                    <div class="performance-bar">
+                        <div class="bar-header">
+                            <span>Security Score</span>
+                            <span>100/100</span>
+                        </div>
+                        <div class="bar-fill" style="width: 100%;"></div>
+                    </div>
+                    <div class="performance-bar">
+                        <div class="bar-header">
+                            <span>Uptime Reliability</span>
+                            <span>99.99%</span>
+                        </div>
+                        <div class="bar-fill" style="width: 99.99%;"></div>
+                    </div>
                 </div>
-                <div class="feature-content">
-                    <h3>Enterprise Security</h3>
-                    <p>Multiple layers of security to protect your business and customer data</p>
-                    <ul class="feature-list">
-                        <li><i class="fas fa-check"></i> DDoS Protection</li>
-                        <li><i class="fas fa-check"></i> SSL Certificates</li>
-                        <li><i class="fas fa-check"></i> Web Application Firewall</li>
-                        <li><i class="fas fa-check"></i> Regular Security Audits</li>
+                <div>
+                    <ul class="performance-features">
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Advanced caching mechanisms for optimal performance</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Content Delivery Network (CDN) integration</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Automated backups and disaster recovery</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Database optimization and query caching</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Load balancing across multiple servers</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>Real-time performance analytics dashboard</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>SSL certificates and HTTPS enforcement</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-check-circle"></i>
+                            <span>24/7 expert technical support team</span>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section testimonials" id="testimonials">
-        <div class="section-header">
-            <h2>Success Stories</h2>
-            <p>Trusted by leading brands worldwide</p>
-        </div>
-        <div class="testimonial-grid">
-            <div class="testimonial-card">
-                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
-                <div class="testimonial-text">CoreFinity has been fantastic. After being with the company for two years,
-                    you're only had a couple of instances where we've had alerts, but the response time is wonderful.
-                    The issue is already resolved by the time I wake to write a ticket.</div>
-                <div class="testimonial-author">
-                    <div class="author-avatar">MD</div>
-                    <div class="author-info">
-                        <h4>Managing Director</h4>
-                        <p>Leading Ecommerce Company</p>
+    <section class="why-section">
+        <div class="container">
+            <div class="why-content">
+                <div class="why-text">
+                    <div class="section-label">WHY</div>
+                    <h2>WE DESERVE <span class="highlight">YOUR ATTENTION</span></h2>
+                    <p>Corefinity offers a unique and scalable stack that leverages reliability of the cloud built with
+                        love by verified developers and engineers.</p>
+                    <p>Our robust stack has been built by verified developers and engineers, with unique and outstanding
+                        differences. In achieving these goals, our team has created a fully featured suite for your web
+                        needs.</p>
+                    <p>We view rapid throughput as a lift from the darkness to the community; with this aim we created a
+                        fully featured package in handling a successful ecommerce offering.</p>
+                    <p>We are extremely developer and agency friendly; our experts have helped hundreds of clients in
+                        the ecommerce ecosystem. This allows us to empower their clients to grow and scale accordingly.
+                    </p>
+                    <a href="#contact" class="cta-button" style="margin-top: 24px;"><i class="fas fa-rocket"></i> GET
+                        STARTED</a>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                        <div class="stat-value">24/7/365</div>
+                        <div class="stat-label">WE NEVER GO OFFLINE - SUPPORT</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                        <div class="stat-value">99.99%</div>
+                        <div class="stat-label">UPTIME SLA</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-stopwatch"></i></div>
+                        <div class="stat-value">7 MINUTES</div>
+                        <div class="stat-label">AVERAGE EMERGENCY RESPONSE TIME</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-rocket"></i></div>
+                        <div class="stat-value">FASTEST</div>
+                        <div class="stat-label">MAGENTO HOSTING ABOVE 90-95</div>
                     </div>
                 </div>
             </div>
-            <div class="testimonial-card">
-                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
-                <div class="testimonial-text">We now have around 8 managed servers with CoreFinity and slowly moving
-                    away from laravel. I need the support they provide me and my confidence with them is high. I would
-                    refer CoreFinity and I have.</div>
-                <div class="testimonial-author">
-                    <div class="author-avatar">LD</div>
-                    <div class="author-info">
-                        <h4>Lead Developer</h4>
-                        <p>Tech Startup</p>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-label">CLIENT TESTIMONIALS</div>
+                <h2 class="section-title">SUCCESS STORIES</h2>
+            </div>
+            <div class="testimonial-cards">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The fact is, Corefinity helped us through a very difficult period which
+                        would have otherwise been disastrous for our business. The first calendar quarter of the year
+                        has been superb for business, and we have hit record figures with Corefinity's help. It is often
+                        said that you judge a company by the way problems are dealt with - Same Corefinity to us all of
+                        the best!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">PT</div>
+                        <div class="author-info">
+                            <h4>Peter Tass</h4>
+                            <p>Managing Director</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Corefinity's hosting has been fantastic. After being with the company
+                        for two years, we've only had a couple of instances where service wasn't perfect. Your response
+                        time is wonderful and you're always quick to react to any issues, should they occur. I'd
+                        definitely recommend your hosting!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MD</div>
+                        <div class="author-info">
+                            <h4>Managing Director</h4>
+                            <p>Client Company</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"We now have around 8 managed servers with Corefinity and are steadily
+                        moving forward. I need the support they provide me and the entire team. The transfer was
+                        seamless and the budget works perfectly for our projects. I would refer Corefinity (and I did
+                        multiple times) to anyone looking to work with them and I wouldn't hesitate to recommend your
+                        hosting."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">BG</div>
+                        <div class="author-info">
+                            <h4>Baj Gorsia, Lead Developer</h4>
+                            <p>Your Team Healthcare</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section pricing" id="pricing">
-        <div class="section-header">
-            <h2>Flexible Pricing Plans</h2>
-            <p>Choose the perfect plan for your business needs</p>
-        </div>
-        <div class="pricing-grid">
-            <div class="pricing-card">
-                <h3>Starter</h3>
-                <div class="price">$99<span>/mo</span></div>
-                <ul class="pricing-features">
-                    <li><i class="fas fa-check"></i> 2 vCPU Cores</li>
-                    <li><i class="fas fa-check"></i> 4GB RAM</li>
-                    <li><i class="fas fa-check"></i> 100GB SSD Storage</li>
-                    <li><i class="fas fa-check"></i> 2TB Bandwidth</li>
-                    <li><i class="fas fa-check"></i> 24/7 Support</li>
-                </ul>
-                <button class="btn-primary" style="width:100%">Get Started</button>
+    <section class="trusted-by">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">COREFINITY IS TRUSTED BY:</h2>
             </div>
-            <div class="pricing-card featured">
-                <div class="pricing-badge">Most Popular</div>
-                <h3>Professional</h3>
-                <div class="price">$299<span>/mo</span></div>
-                <ul class="pricing-features">
-                    <li><i class="fas fa-check"></i> 4 vCPU Cores</li>
-                    <li><i class="fas fa-check"></i> 8GB RAM</li>
-                    <li><i class="fas fa-check"></i> 250GB SSD Storage</li>
-                    <li><i class="fas fa-check"></i> 5TB Bandwidth</li>
-                    <li><i class="fas fa-check"></i> Advanced Monitoring</li>
-                    <li><i class="fas fa-check"></i> Priority Support</li>
-                </ul>
-                <button class="btn-primary" style="width:100%">Get Started</button>
-            </div>
-            <div class="pricing-card">
-                <h3>Enterprise</h3>
-                <div class="price">$599<span>/mo</span></div>
-                <ul class="pricing-features">
-                    <li><i class="fas fa-check"></i> 8 vCPU Cores</li>
-                    <li><i class="fas fa-check"></i> 16GB RAM</li>
-                    <li><i class="fas fa-check"></i> 500GB SSD Storage</li>
-                    <li><i class="fas fa-check"></i> 10TB Bandwidth</li>
-                    <li><i class="fas fa-check"></i> Custom Solutions</li>
-                    <li><i class="fas fa-check"></i> Dedicated Support</li>
-                </ul>
-                <button class="btn-primary" style="width:100%">Get Started</button>
+            <div class="client-logos">
+                <span class="client-logo"><i class="fas fa-building"></i> L&S</span>
+                <span class="client-logo"><i class="fas fa-ship"></i> Cruise118.com</span>
+                <span class="client-logo"><i class="fas fa-anchor"></i> MARINE WIVES</span>
+                <span class="client-logo"><i class="fas fa-water"></i> RiverVoyages</span>
+                <span class="client-logo"><i class="fas fa-store"></i> Pete</span>
             </div>
         </div>
     </section>
 
-    <section class="section contact" id="contact">
-        <div class="section-header">
-            <h2>Get In Touch</h2>
-            <p>Ready to transform your infrastructure? Let's talk</p>
-        </div>
-        <div class="contact-grid">
-            <div class="contact-info">
-                <h3>Contact Information</h3>
-                <p>Have questions about our services or need a custom solution? Reach out to our team of experts.</p>
-                <ul class="contact-details">
-                    <li>
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <strong>Address</strong>
-                            <p>123 Cloud Street, Tech City, TC 10101</p>
-                        </div>
-                    </li>
-                    <li>
-                        <i class="fas fa-phone"></i>
-                        <div>
-                            <strong>Phone</strong>
-                            <p>+1 (555) 123-4567</p>
-                        </div>
-                    </li>
-                    <li>
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <strong>Email</strong>
-                            <p>hello@corefinity.com</p>
-                        </div>
-                    </li>
-                </ul>
+    <section class="cta-section" id="contact">
+        <div class="container">
+            <h2>Have a question about our services or want to discuss more in depth?</h2>
+            <div class="cta-buttons">
+                <a href="tel:+88881237008" class="cta-button cta-white"><i class="fas fa-phone"></i> CALL US:
+                    +8888-123-7008</a>
+                <a href="#contact" class="cta-button"><i class="fas fa-comments"></i> CHAT TO AN EXPERT</a>
+                <a href="tel:+441615058000" class="cta-button cta-white"><i class="fas fa-phone"></i> CALL UK: +44 161
+                    505 8000</a>
             </div>
-            <div class="contact-form">
-                <h3>Send Us a Message</h3>
-                <form>
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" placeholder="Your Name">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" placeholder="your.email@example.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="company">Company</label>
-                        <input type="text" id="company" placeholder="Your Company">
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" placeholder="Tell us about your project..."></textarea>
-                    </div>
-                    <button type="submit" class="btn-primary" style="width:100%">Send Message</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta-section">
-        <h2>Ready to Transform Your Infrastructure?</h2>
-        <p>Join thousands of businesses that trust CoreFinity for their mission-critical applications</p>
-        <div class="cta-buttons">
-            <button class="btn-primary"><i class="fas fa-rocket"></i> Start Free Trial</button>
-            <button class="btn-secondary" style="background:transparent;border-color:#fff;color:#fff"><i
-                    class="fas fa-comments"></i> Schedule Demo</button>
         </div>
     </section>
 
     <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <h3>CoreFinity</h3>
-                <ul>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> About Us</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Careers</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Blog</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Press</a></li>
-                </ul>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>QUICK LINKS</h4>
+                    <ul>
+                        <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+                        <li><a href="#services"><i class="fas fa-cogs"></i> Services</a></li>
+                        <li><a href="#work"><i class="fas fa-briefcase"></i> Our Work</a></li>
+                        <li><a href="#pricing"><i class="fas fa-dollar-sign"></i> Pricing</a></li>
+                        <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                        <li><a href="#partners"><i class="fas fa-handshake"></i> Our Partners</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>SOLUTIONS</h4>
+                    <ul>
+                        <li><a href="#magento"><i class="fab fa-magento"></i> Magento Hosting</a></li>
+                        <li><a href="#wordpress"><i class="fab fa-wordpress"></i> WordPress Hosting</a></li>
+                        <li><a href="#ecommerce"><i class="fas fa-shopping-cart"></i> E-commerce Hosting</a></li>
+                        <li><a href="#laravel"><i class="fab fa-laravel"></i> Laravel Hosting</a></li>
+                        <li><a href="#cloud"><i class="fas fa-cloud"></i> Cloud Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>UNITED KINGDOM</h4>
+                    <ul>
+                        <li><a href="tel:+441615058000"><i class="fas fa-phone"></i> +44 161 505 8000</a></li>
+                        <li><a href="mailto:info@corefinity.com"><i class="fas fa-envelope"></i> info@corefinity.com</a>
+                        </li>
+                        <li><i class="fas fa-map-marker-alt"></i> Metro City House (Office Gate), Gateshead, Tyne and
+                            Wear, NE11 9DJ</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>UNITED STATES</h4>
+                    <ul>
+                        <li><a href="tel:+88881237008"><i class="fas fa-phone"></i> +8888-123-7008</a></li>
+                        <li><a href="mailto:info@corefinity.com"><i class="fas fa-envelope"></i> info@corefinity.com</a>
+                        </li>
+                        <li><i class="fas fa-map-marker-alt"></i> 750 Highway Lane (Office 204), Chattanooga, Tennessee,
+                            TN 37450</li>
+                    </ul>
+                </div>
             </div>
-            <div class="footer-col">
-                <h3>Services</h3>
-                <ul>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Cloud Hosting</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Managed Services</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Migration</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Consulting</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h3>Support</h3>
-                <ul>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Documentation</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Knowledge Base</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> System Status</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Contact Support</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h3>Legal</h3>
-                <ul>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Terms of Service</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Cookie Policy</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> GDPR</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div>© 2023 CoreFinity. All rights reserved.</div>
-            <div class="social-links">
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fab fa-facebook"></i></a>
+            <div class="footer-bottom">
+                <p>Copyright © 2025 Corefinity Consulting Ltd. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', function () {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
+        const mobileMenuBtn = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+        const dropdowns = document.querySelectorAll('.dropdown');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
         });
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+        dropdowns.forEach(dropdown => {
+            const toggle = dropdown.querySelector('.dropdown-toggle');
+            toggle.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    dropdown.classList.toggle('active');
+                }
             });
         });
 
-        // Animation on scroll
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                navLinks.classList.remove('active');
+                dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
+            }
+        });
+
         const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -1579,8 +1282,10 @@
             });
         }, observerOptions);
 
-        // Observe all animated elements
-        document.querySelectorAll('.section-header, .card, .stat, .platform-card, .step, .feature-row, .testimonial-card, .pricing-card').forEach(el => {
+        document.querySelectorAll('.feature-card, .metric-card, .stat-card, .testimonial-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
         });
     </script>
